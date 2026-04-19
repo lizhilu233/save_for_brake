@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>智能分析平台 - 风险仪表盘</title>
+  <style>
+    :root {
+      --bg: #f3f6fb;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --primary: #2563eb;
+      --danger: #dc2626;
+      --warn: #d97706;
+      --ok: #16a34a;
+      --border: #e5e7eb;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+    .container {
+      width: min(1200px, 94vw);
+      margin: 20px auto 30px;
+    }
+    .panel {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+      margin-bottom: 16px;
+    }
+    h1 {
+      margin: 0 0 6px;
+      font-size: 24px;
+    }
+    .subtitle {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .filters {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr minmax(200px, 1fr) auto;
+      gap: 12px;
+      align-items: end;
+    }
+    @media (max-width: 900px) {
+      .filters { grid-template-columns: 1fr; }
+    }
+    label {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    input, select, button {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px;
+      font-size: 14px;
+      background: #fff;
+    }
+    button {
+      cursor: pointer;
+      font-weight: 600;
+      width: auto;
+      min-width: 90px;
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+    .kpi {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 10px;
+    }
+    .kpi-item {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px;
+    }
+    .kpi-item p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .kpi-item h3 {
+      margin: 8px 0 0;
+      font-size: 24px;
+    }
+    .case-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 12px;
+    }
+    .case-card {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .case-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      align-items: flex-start;
+    }
+    .case-id {
+      color: var(--muted);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    .case-title {
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.45;
+    }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 12px;
+    }
+    .chip {
+      border-radius: 999px;
+      padding: 3px 9px;
+      background: #eff6ff;
+      color: #1d4ed8;
+      border: 1px solid #dbeafe;
+    }
+    .chip-loss-high { background: #fee2e2; color: var(--danger); border-color: #fecaca; }
+    .chip-loss-mid { background: #fef3c7; color: var(--warn); border-color: #fde68a; }
+    .chip-loss-low { background: #dcfce7; color: var(--ok); border-color: #bbf7d0; }
+    .detail {
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.55;
+      color: #374151;
+    }
+    .link-btn {
+      background: transparent;
+      border: 0;
+      padding: 0;
+      color: var(--primary);
+      cursor: pointer;
+      width: auto;
+      align-self: flex-start;
+    }
+    .empty {
+      text-align: center;
+      color: var(--muted);
+      padding: 20px 10px;
+    }
+    .modal-mask {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+    }
+    .modal {
+      width: min(800px, 96vw);
+      max-height: 92vh;
+      overflow-y: auto;
+      background: #fff;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      padding: 16px;
+    }
+    .modal h2 { margin-top: 0; font-size: 20px; }
+    .modal p { margin: 8px 0; line-height: 1.65; }
+    .close-row { text-align: right; margin-top: 10px; }
+    .charts-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+    @media (max-width: 900px) {
+      .charts-grid { grid-template-columns: 1fr; }
+    }
+    .chart-wrap {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px;
+      background: #fafbfc;
+    }
+    .chart-wrap .chart-head {
+      margin: 0 0 10px;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .chart-hint {
+      margin: 10px 0 0;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+    .chart-wrap canvas {
+      max-height: 300px;
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="panel">
+      <h1>误踩油门事故案例库</h1>
+    </div>
+
+    <div class="panel">
+      <div class="filters">
+        <div>
+          <label for="keyword">标题/详情关键词</label>
+          <input id="keyword" type="text" placeholder="例如：停车场、地下车库、老人驾驶员">
+        </div>
+        <div>
+          <label for="carFilter">车型筛选</label>
+          <select id="carFilter"></select>
+        </div>
+        <div>
+          <label for="casualtyFilter">伤亡筛选</label>
+          <select id="casualtyFilter"></select>
+        </div>
+        <div>
+          <label for="fileImport">导入数据集</label>
+          <input id="fileImport" type="file" accept=".xlsx,.xls,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel">
+        </div>
+        <div style="display:flex; gap:8px;">
+          <button id="applyBtn" class="btn-primary">应用筛选</button>
+          <button id="resetBtn">重置</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="kpi">
+        <div class="kpi-item"><p>案例总数</p><h3 id="kpiTotal">0</h3></div>
+        <div class="kpi-item"><p>涉及车型数</p><h3 id="kpiCarTypes">0</h3></div>
+        <div class="kpi-item"><p>含伤亡案例</p><h3 id="kpiInjury">0</h3></div>
+        <div class="kpi-item"><p>高频车型</p><h3 id="kpiTopCar">-</h3></div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <p class="subtitle" style="margin: 0 0 12px;">以下图表随上方筛选条件同步更新。</p>
+      <div class="charts-grid">
+        <div class="chart-wrap">
+          <p class="chart-head">驾驶员年龄分布</p>
+          <canvas id="chartAge" aria-label="驾驶员年龄分布柱状图"></canvas>
+          <p class="chart-hint" id="ageChartHint"></p>
+        </div>
+        <div class="chart-wrap">
+          <p class="chart-head">事故车型分布</p>
+          <canvas id="chartCar" aria-label="事故车型分布条形图"></canvas>
+          <p class="chart-hint">展示当前筛选结果中各车型案例数；品种过多时合并为「其他」。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="case-grid" id="caseGrid"></div>
+      <div class="empty" id="emptyState" style="display:none;">没有匹配的案例，请调整筛选条件。</div>
+    </div>
+  </div>
+
+  <div class="modal-mask" id="modalMask">
+    <div class="modal">
+      <h2 id="modalTitle">案例详情</h2>
+      <p><strong>案例号：</strong><span id="dId"></span></p>
+      <p><strong>驾驶员年龄：</strong><span id="dAge"></span></p>
+      <p><strong>车型：</strong><span id="dCar"></span></p>
+      <p><strong>伤亡程度：</strong><span id="dCasualty"></span></p>
+      <p><strong>事故详情：</strong><span id="dDetail"></span></p>
+      <div class="close-row">
+        <button id="closeModalBtn">关闭</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let allCases = [];
+
+    const state = { keyword: "", car: "全部", casualty: "全部" };
+
+    const keywordEl = document.getElementById("keyword");
+    const carFilterEl = document.getElementById("carFilter");
+    const casualtyFilterEl = document.getElementById("casualtyFilter");
+    const fileImportEl = document.getElementById("fileImport");
+    const caseGridEl = document.getElementById("caseGrid");
+    const emptyEl = document.getElementById("emptyState");
+
+    function normalizeKey(key) {
+      return String(key || "")
+        .replace(/^\uFEFF/, "")
+        .replace(/[\s\u3000]+/g, "")
+        .trim();
+    }
+
+    function pickField(row, keys) {
+      for (const key of keys) {
+        if (row[key] !== undefined && row[key] !== null && String(row[key]).trim() !== "") {
+          return String(row[key]).trim();
+        }
+      }
+      return "";
+    }
+
+    function casualtyGroup(text) {
+      const value = String(text || "");
+      if (value.includes("死亡") || value.includes("亡")) return "死亡";
+      if (value.includes("重伤") || value.includes("受伤") || value.includes("伤")) return "受伤";
+      if (value.includes("无伤") || value.includes("无人伤亡")) return "无伤亡";
+      return "其他";
+    }
+
+    function casualtyClass(group) {
+      if (group === "死亡") return "chip-loss-high";
+      if (group === "受伤") return "chip-loss-mid";
+      return "chip-loss-low";
+    }
+
+    const AGE_BUCKET_ORDER = ["≤29岁", "30–39岁", "40–49岁", "50–59岁", "60–69岁", "≥70岁", "未知"];
+
+    function parseAgeValue(raw) {
+      if (raw === undefined || raw === null || raw === "") return null;
+      if (typeof raw === "number" && !Number.isNaN(raw) && raw > 0 && raw < 120) return Math.round(raw);
+      const s = String(raw).trim();
+      if (!s) return null;
+      const num = Number(s);
+      if (!Number.isNaN(num) && num > 0 && num < 120) return Math.round(num);
+      const m = s.match(/^(\d{1,2})\s*(?:岁|周岁)?$/);
+      if (m) {
+        const n = parseInt(m[1], 10);
+        if (n >= 10 && n <= 99) return n;
+      }
+      return null;
+    }
+
+    function parseAgeFromText(text) {
+      const s = String(text || "");
+      const patterns = [
+        /(?:驾驶员|司机|驾驶人|当事人)?\s*(?:年龄|岁数)\s*[：:\s]\s*(\d{1,2})\s*(?:岁|周岁)?/,
+        /(\d{1,2})\s*周岁/,
+        /(\d{1,2})\s*岁(?!\s*[年月日])/,
+      ];
+      for (const re of patterns) {
+        const m = s.match(re);
+        if (m) {
+          const n = parseInt(m[1], 10);
+          if (n >= 16 && n <= 99) return n;
+        }
+      }
+      return null;
+    }
+
+    function resolveDriverAge(ageRaw, titleText, detailText) {
+      let y = parseAgeValue(ageRaw);
+      if (y != null) return y;
+      y = parseAgeFromText(titleText || "");
+      if (y != null) return y;
+      return parseAgeFromText(detailText || "");
+    }
+
+    function ageBucketFromYears(age) {
+      if (age == null || Number.isNaN(age)) return "未知";
+      const a = Math.round(Number(age));
+      if (a <= 29) return "≤29岁";
+      if (a <= 39) return "30–39岁";
+      if (a <= 49) return "40–49岁";
+      if (a <= 59) return "50–59岁";
+      if (a <= 69) return "60–69岁";
+      return "≥70岁";
+    }
+
+    /** 与《误踩油门事故案例数据集》一致；可选列「驾驶员年龄」用于统计图表 */
+    function toCaseItem(rawRow, index) {
+      const row = {};
+      Object.keys(rawRow).forEach(key => { row[normalizeKey(key)] = rawRow[key]; });
+      const idRaw = pickField(row, ["案例号", "序号", "ID", "id", "caseid", "编号"]);
+      const titleRaw = pickField(row, ["标题", "案例标题", "title"]);
+      const detailRaw = pickField(row, ["事故详情", "详情", "事故描述", "description"]);
+      const carRaw = pickField(row, ["车型", "车辆类型", "车辆型号", "car"]);
+      const casualtyRaw = pickField(row, ["伤亡程度", "伤亡", "严重程度", "casualty"]);
+      const ageRaw = pickField(row, ["驾驶员年龄", "司机年龄", "驾驶人年龄", "年龄"]);
+      const idDisplay = idRaw !== "" ? idRaw : String(index + 1);
+      const title = titleRaw || (idRaw !== "" ? `案例 ${idRaw}` : `案例 ${index + 1}`);
+      const ageYears = resolveDriverAge(ageRaw, titleRaw || title, detailRaw);
+      const ageBucket = ageBucketFromYears(ageYears);
+      return {
+        uid: `r${index}`,
+        id: idDisplay,
+        title,
+        detail: detailRaw || "",
+        car: carRaw || "未提供车型",
+        casualty: casualtyRaw || "未提供",
+        ageYears,
+        ageBucket,
+      };
+    }
+
+    function rowHasContent(item) {
+      const meaningful = [item.title, item.detail, item.car, item.casualty].filter(
+        v => v && !/^未提供/.test(v)
+      );
+      return meaningful.length > 0;
+    }
+
+    let chartAgeInst = null;
+    let chartCarInst = null;
+
+    function aggregateCarLabelsCounts(list, topN = 12) {
+      const count = {};
+      list.forEach(item => {
+        const k = item.car || "未提供车型";
+        count[k] = (count[k] || 0) + 1;
+      });
+      const entries = Object.entries(count).sort((a, b) => b[1] - a[1]);
+      if (entries.length <= topN) {
+        return {
+          labels: entries.map(e => e[0]),
+          counts: entries.map(e => e[1]),
+        };
+      }
+      const top = entries.slice(0, topN);
+      const otherSum = entries.slice(topN).reduce((s, [, c]) => s + c, 0);
+      return {
+        labels: [...top.map(e => e[0]), "其他"],
+        counts: [...top.map(e => e[1]), otherSum],
+      };
+    }
+
+    function renderCharts(list) {
+      const hintEl = document.getElementById("ageChartHint");
+      const canvasAge = document.getElementById("chartAge");
+      const canvasCar = document.getElementById("chartCar");
+      if (!canvasAge || !canvasCar || !window.Chart) return;
+
+      const bucketCounts = Object.fromEntries(AGE_BUCKET_ORDER.map(b => [b, 0]));
+      let knownAge = 0;
+      list.forEach(item => {
+        const b = item.ageBucket && bucketCounts[item.ageBucket] !== undefined
+          ? item.ageBucket
+          : "未知";
+        bucketCounts[b]++;
+        if (item.ageYears != null) knownAge++;
+      });
+
+      if (chartAgeInst) {
+        chartAgeInst.destroy();
+        chartAgeInst = null;
+      }
+      if (chartCarInst) {
+        chartCarInst.destroy();
+        chartCarInst = null;
+      }
+
+      const ageData = AGE_BUCKET_ORDER.map(k => bucketCounts[k]);
+      chartAgeInst = new Chart(canvasAge, {
+        type: "bar",
+        data: {
+          labels: AGE_BUCKET_ORDER,
+          datasets: [{
+            label: "案例数",
+            data: ageData,
+            backgroundColor: AGE_BUCKET_ORDER.map((_, i) =>
+              `hsl(${226 - i * 10}, 72%, ${56 - i * 3}%)`
+            ),
+            borderRadius: 6,
+          }],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          plugins: { legend: { display: false } },
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: { precision: 0 },
+            },
+            x: {
+              ticks: { maxRotation: 40, minRotation: 0 },
+            },
+          },
+        },
+      });
+
+      const { labels: carLabels, counts: carCounts } = aggregateCarLabelsCounts(list, 12);
+      chartCarInst = new Chart(canvasCar, {
+        type: "bar",
+        data: {
+          labels: carLabels,
+          datasets: [{
+            label: "案例数",
+            data: carCounts,
+            backgroundColor: "rgba(37, 99, 235, 0.75)",
+            borderRadius: 4,
+          }],
+        },
+        options: {
+          indexAxis: "y",
+          responsive: true,
+          maintainAspectRatio: true,
+          plugins: { legend: { display: false } },
+          scales: {
+            x: {
+              beginAtZero: true,
+              ticks: { precision: 0 },
+            },
+          },
+        },
+      });
+
+      if (!list.length) {
+        hintEl.textContent = "暂无筛选结果：导入数据或放宽筛选后可查看分布。";
+      } else if (knownAge === 0) {
+        hintEl.textContent =
+          "当前结果未识别到年龄：请在 Excel 中增加「驾驶员年龄」列，或在标题/详情中用「××岁」「年龄：××」等形式标注。";
+      } else {
+        hintEl.textContent =
+          `已解析年龄的案例 ${knownAge} 条（来自列或文本）；其余计入「未知」分段。`;
+      }
+    }
+
+    function parseWorkbookBuffer(buffer) {
+      if (!window.XLSX) return 0;
+      const wb = XLSX.read(buffer, { type: "array" });
+      const sheet = wb.Sheets[wb.SheetNames[0]];
+      const rows = XLSX.utils.sheet_to_json(sheet, { defval: "", raw: false });
+      const parsed = rows
+        .map((row, idx) => toCaseItem(row, idx))
+        .filter(item => rowHasContent(item));
+      if (parsed.length) {
+        allCases = parsed;
+      }
+      return parsed.length;
+    }
+
+    async function tryLoadExcelData() {
+      if (!window.XLSX) return;
+      const candidates = [
+        "误踩油门事故案例数据集.xlsx",
+        "误踩油门事故案例分析数据集.xlsx",
+        "误踩油门事故案例分析数据集.xls"
+      ];
+      for (const fileName of candidates) {
+        try {
+          const response = await fetch(fileName);
+          if (!response.ok) continue;
+          const buffer = await response.arrayBuffer();
+          if (parseWorkbookBuffer(buffer)) return;
+        } catch (_) {
+          // ignore this candidate (e.g. file:// CORS / network)
+        }
+      }
+    }
+
+    function setupFilters() {
+      carFilterEl.innerHTML = "";
+      casualtyFilterEl.innerHTML = "";
+      const carOptions = ["全部", ...new Set(allCases.map(item => item.car))];
+      const casualtyOptions = ["全部", ...new Set(allCases.map(item => casualtyGroup(item.casualty)))];
+      carOptions.forEach(item => carFilterEl.add(new Option(item, item)));
+      casualtyOptions.forEach(item => casualtyFilterEl.add(new Option(item, item)));
+    }
+
+    function getFilteredCases() {
+      const kw = state.keyword.trim().toLowerCase();
+      return allCases.filter(item => {
+        const matchesKeyword = !kw || item.title.toLowerCase().includes(kw) || item.detail.toLowerCase().includes(kw);
+        const matchesCar = state.car === "全部" || item.car === state.car;
+        const matchesCasualty = state.casualty === "全部" || casualtyGroup(item.casualty) === state.casualty;
+        return matchesKeyword && matchesCar && matchesCasualty;
+      });
+    }
+
+    function renderKpis(list) {
+      document.getElementById("kpiTotal").textContent = list.length;
+      document.getElementById("kpiCarTypes").textContent = new Set(list.map(item => item.car)).size;
+      document.getElementById("kpiInjury").textContent = list.filter(item => {
+        const g = casualtyGroup(item.casualty);
+        return g === "受伤" || g === "死亡";
+      }).length;
+
+      const countMap = {};
+      list.forEach(item => { countMap[item.car] = (countMap[item.car] || 0) + 1; });
+      const topCar = Object.entries(countMap).sort((a, b) => b[1] - a[1])[0];
+      document.getElementById("kpiTopCar").textContent = topCar ? topCar[0] : "-";
+    }
+
+    function openDetail(item) {
+      document.getElementById("modalTitle").textContent = item.title;
+      document.getElementById("dId").textContent = item.id;
+      document.getElementById("dAge").textContent =
+        item.ageYears != null
+          ? `${item.ageYears} 岁（${item.ageBucket || ageBucketFromYears(item.ageYears)}）`
+          : "未识别（可补充「驾驶员年龄」列或在详情中写明年龄）";
+      document.getElementById("dCar").textContent = item.car;
+      document.getElementById("dCasualty").textContent = item.casualty;
+      document.getElementById("dDetail").textContent = item.detail || "（未填写）";
+      document.getElementById("modalMask").style.display = "flex";
+    }
+
+    function renderCaseCards(list) {
+      caseGridEl.innerHTML = "";
+      if (!list.length) {
+        emptyEl.style.display = "block";
+        emptyEl.textContent = allCases.length
+          ? "没有匹配的案例，请调整筛选条件。"
+          : "暂无案例数据：请在上方的「导入数据集」处选择 Excel 文件。";
+        return;
+      }
+      emptyEl.style.display = "none";
+      list.forEach(item => {
+        const group = casualtyGroup(item.casualty);
+        const card = document.createElement("article");
+        card.className = "case-card";
+        card.innerHTML = `
+          <div class="case-head">
+            <h3 class="case-title">${item.title}</h3>
+            <span class="case-id">案例号 ${item.id}</span>
+          </div>
+          <div class="meta">
+            <span class="chip">${item.car}</span>
+            <span class="chip ${casualtyClass(group)}">${group}</span>
+          </div>
+          <p class="detail">${item.detail ? `${item.detail.slice(0, 88)}${item.detail.length > 88 ? "..." : ""}` : "（暂无详情）"}</p>
+          <button class="link-btn" data-uid="${item.uid}">查看完整详情</button>
+        `;
+        caseGridEl.appendChild(card);
+      });
+    }
+
+    function render() {
+      const filtered = getFilteredCases();
+      renderKpis(filtered);
+      renderCharts(filtered);
+      renderCaseCards(filtered);
+    }
+
+    document.getElementById("applyBtn").addEventListener("click", () => {
+      state.keyword = keywordEl.value;
+      state.car = carFilterEl.value;
+      state.casualty = casualtyFilterEl.value;
+      render();
+    });
+
+    document.getElementById("resetBtn").addEventListener("click", () => {
+      state.keyword = "";
+      state.car = "全部";
+      state.casualty = "全部";
+      keywordEl.value = "";
+      carFilterEl.value = "全部";
+      casualtyFilterEl.value = "全部";
+      render();
+    });
+
+    fileImportEl.addEventListener("change", async event => {
+      const file = event.target.files && event.target.files[0];
+      if (!file || !window.XLSX) return;
+      try {
+        const buffer = await file.arrayBuffer();
+        const n = parseWorkbookBuffer(buffer);
+        if (!n) {
+          alert("未能从所选文件中解析出有效案例行，请确认首行为表头（案例号、标题、伤亡程度、事故详情、车型；可选「驾驶员年龄」）且表格有数据。");
+        }
+        setupFilters();
+        render();
+      } catch (err) {
+        alert("读取 Excel 失败，请确认文件未被占用且格式为 .xlsx / .xls。");
+      }
+      event.target.value = "";
+    });
+
+    caseGridEl.addEventListener("click", event => {
+      const btn = event.target.closest("button[data-uid]");
+      if (!btn) return;
+      const uid = btn.dataset.uid;
+      const item = allCases.find(x => x.uid === uid);
+      if (item) openDetail(item);
+    });
+
+    document.getElementById("closeModalBtn").addEventListener("click", () => {
+      document.getElementById("modalMask").style.display = "none";
+    });
+    document.getElementById("modalMask").addEventListener("click", event => {
+      if (event.target.id === "modalMask") {
+        document.getElementById("modalMask").style.display = "none";
+      }
+    });
+
+    async function init() {
+      await tryLoadExcelData();
+      setupFilters();
+      render();
+    }
+    init();
+  </script>
+</body>
+</html>
