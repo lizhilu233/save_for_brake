@@ -19,12 +19,12 @@
     * { box-sizing: border-box; }
     body {
       margin: 0;
+      font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
       background: var(--bg);
       color: var(--text);
-      font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
     }
     .container {
-      width: min(1200px, 94vw);
+      width: min(1100px, 94vw);
       margin: 20px auto 30px;
     }
     .panel {
@@ -40,123 +40,127 @@
       font-size: 24px;
     }
     .subtitle {
-      margin: 0;
       color: var(--muted);
       font-size: 14px;
+      margin: 0;
     }
     .filters {
       display: grid;
-      grid-template-columns: 1.4fr 1fr 1fr minmax(200px, 1fr) auto;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: 12px;
-      align-items: end;
     }
-    @media (max-width: 900px) {
-      .filters { grid-template-columns: 1fr; }
-    }
-    label {
-      display: block;
-      margin-bottom: 6px;
-      color: var(--muted);
-      font-size: 13px;
-    }
-    input, select, button {
+    label { font-size: 13px; color: var(--muted); display: block; margin-bottom: 6px; }
+    select, button {
       width: 100%;
-      border: 1px solid var(--border);
+      padding: 9px 10px;
       border-radius: 10px;
-      padding: 10px;
-      font-size: 14px;
+      border: 1px solid var(--border);
       background: #fff;
+      font-size: 14px;
     }
     button {
       cursor: pointer;
+      transition: 0.2s;
       font-weight: 600;
-      width: auto;
-      min-width: 90px;
     }
     .btn-primary {
       background: var(--primary);
       color: #fff;
       border-color: var(--primary);
     }
+    .btn-primary:hover { filter: brightness(0.95); }
+    .btn-light:hover { background: #f9fafb; }
     .kpi {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
       gap: 10px;
     }
     .kpi-item {
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: 12px;
+      background: #fff;
     }
-    .kpi-item p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 12px;
-    }
-    .kpi-item h3 {
-      margin: 8px 0 0;
-      font-size: 24px;
-    }
-    .case-grid {
+    .kpi-item p { margin: 0; color: var(--muted); font-size: 12px; }
+    .kpi-item h3 { margin: 8px 0 0; font-size: 24px; }
+    .dist-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 12px;
     }
-    .case-card {
+    .dist-card {
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: 12px;
       background: #fff;
+    }
+    .dist-card h3 {
+      margin: 0 0 10px;
+      font-size: 15px;
+    }
+    .dist-list {
       display: flex;
       flex-direction: column;
       gap: 8px;
     }
-    .case-head {
-      display: flex;
-      justify-content: space-between;
+    .dist-row {
+      display: grid;
+      grid-template-columns: 92px 1fr 52px;
+      align-items: center;
       gap: 8px;
-      align-items: flex-start;
-    }
-    .case-id {
-      color: var(--muted);
       font-size: 12px;
+    }
+    .dist-label {
+      color: var(--text);
       white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
-    .case-title {
-      margin: 0;
-      font-size: 15px;
-      line-height: 1.45;
-    }
-    .meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      font-size: 12px;
-    }
-    .chip {
+    .dist-bar-wrap {
+      background: #eef2ff;
       border-radius: 999px;
-      padding: 3px 9px;
-      background: #eff6ff;
-      color: #1d4ed8;
-      border: 1px solid #dbeafe;
+      height: 10px;
+      overflow: hidden;
     }
-    .chip-loss-high { background: #fee2e2; color: var(--danger); border-color: #fecaca; }
-    .chip-loss-mid { background: #fef3c7; color: var(--warn); border-color: #fde68a; }
-    .chip-loss-low { background: #dcfce7; color: var(--ok); border-color: #bbf7d0; }
-    .detail {
-      margin: 0;
-      font-size: 13px;
-      line-height: 1.55;
-      color: #374151;
+    .dist-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #3b82f6, #2563eb);
+      border-radius: 999px;
     }
+    .dist-val {
+      text-align: right;
+      color: var(--muted);
+    }
+    .table-wrap { overflow-x: auto; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 760px;
+      font-size: 14px;
+    }
+    th, td {
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      padding: 10px 8px;
+      vertical-align: top;
+    }
+    th { color: var(--muted); font-weight: 600; font-size: 12px; }
+    .tag {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .tag-high { background: #fee2e2; color: var(--danger); }
+    .tag-mid { background: #fef3c7; color: var(--warn); }
+    .tag-low { background: #dcfce7; color: var(--ok); }
     .link-btn {
       background: transparent;
       border: 0;
-      padding: 0;
       color: var(--primary);
+      padding: 0;
       cursor: pointer;
-      width: auto;
-      align-self: flex-start;
     }
     .empty {
       text-align: center;
@@ -173,7 +177,7 @@
       padding: 12px;
     }
     .modal {
-      width: min(800px, 96vw);
+      width: min(760px, 96vw);
       max-height: 92vh;
       overflow-y: auto;
       background: #fff;
@@ -182,69 +186,35 @@
       padding: 16px;
     }
     .modal h2 { margin-top: 0; font-size: 20px; }
-    .modal p { margin: 8px 0; line-height: 1.65; }
+    .modal p { margin: 8px 0; line-height: 1.55; }
     .close-row { text-align: right; margin-top: 10px; }
-    .charts-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      align-items: start;
-    }
-    @media (max-width: 900px) {
-      .charts-grid { grid-template-columns: 1fr; }
-    }
-    .chart-wrap {
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 12px;
-      background: #fafbfc;
-    }
-    .chart-wrap .chart-head {
-      margin: 0 0 10px;
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--text);
-    }
-    .chart-hint {
-      margin: 10px 0 0;
-      font-size: 12px;
-      color: var(--muted);
-      line-height: 1.45;
-    }
-    .chart-wrap canvas {
-      max-height: 300px;
-    }
   </style>
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 </head>
 <body>
   <div class="container">
     <div class="panel">
-      <h1>误踩油门事故案例库</h1>
+      <h1>智能分析平台 - 误踩事故风险仪表盘</h1>
+      <p class="subtitle">首个可交互网页（数据来源：误踩案例分析.docx）</p>
     </div>
 
     <div class="panel">
       <div class="filters">
         <div>
-          <label for="keyword">标题/详情关键词</label>
-          <input id="keyword" type="text" placeholder="例如：停车场、地下车库、老人驾驶员">
+          <label for="yearFilter">按年份筛选</label>
+          <select id="yearFilter"></select>
         </div>
         <div>
-          <label for="carFilter">车型筛选</label>
-          <select id="carFilter"></select>
+          <label for="sceneFilter">按场景筛选</label>
+          <select id="sceneFilter"></select>
         </div>
         <div>
-          <label for="casualtyFilter">伤亡筛选</label>
-          <select id="casualtyFilter"></select>
+          <label for="levelFilter">按严重程度筛选</label>
+          <select id="levelFilter"></select>
         </div>
-        <div>
-          <label for="fileImport">导入数据集</label>
-          <input id="fileImport" type="file" accept=".xlsx,.xls,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel">
-        </div>
-        <div style="display:flex; gap:8px;">
-          <button id="applyBtn" class="btn-primary">应用筛选</button>
-          <button id="resetBtn">重置</button>
+        <div style="display:flex; gap:8px; align-items:end;">
+          <button class="btn-primary" id="applyBtn">应用筛选</button>
+          <button class="btn-light" id="resetBtn">重置</button>
         </div>
       </div>
     </div>
@@ -252,30 +222,46 @@
     <div class="panel">
       <div class="kpi">
         <div class="kpi-item"><p>案例总数</p><h3 id="kpiTotal">0</h3></div>
-        <div class="kpi-item"><p>涉及车型数</p><h3 id="kpiCarTypes">0</h3></div>
-        <div class="kpi-item"><p>含伤亡案例</p><h3 id="kpiInjury">0</h3></div>
-        <div class="kpi-item"><p>高频车型</p><h3 id="kpiTopCar">-</h3></div>
+        <div class="kpi-item"><p>伤人事故数</p><h3 id="kpiInjury">0</h3></div>
+        <div class="kpi-item"><p>老年驾驶员案例</p><h3 id="kpiSenior">0</h3></div>
+        <div class="kpi-item"><p>高频场景</p><h3 id="kpiTopScene">-</h3></div>
       </div>
     </div>
 
     <div class="panel">
-      <p class="subtitle" style="margin: 0 0 12px;">以下图表随上方筛选条件同步更新。</p>
-      <div class="charts-grid">
-        <div class="chart-wrap">
-          <p class="chart-head">驾驶员年龄分布</p>
-          <canvas id="chartAge" aria-label="驾驶员年龄分布柱状图"></canvas>
-          <p class="chart-hint" id="ageChartHint"></p>
+      <div class="dist-grid">
+        <div class="dist-card">
+          <h3>事故车型分布</h3>
+          <div class="dist-list" id="carDist"></div>
         </div>
-        <div class="chart-wrap">
-          <p class="chart-head">事故车型分布</p>
-          <canvas id="chartCar" aria-label="事故车型分布条形图"></canvas>
-          <p class="chart-hint">展示当前筛选结果中各车型案例数；品种过多时合并为「其他」。</p>
+        <div class="dist-card">
+          <h3>驾驶员年龄分布</h3>
+          <div class="dist-list" id="ageDist"></div>
+        </div>
+        <div class="dist-card">
+          <h3>事故场景分布</h3>
+          <div class="dist-list" id="sceneDist"></div>
         </div>
       </div>
     </div>
 
     <div class="panel">
-      <div class="case-grid" id="caseGrid"></div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>时间</th>
+              <th>地点</th>
+              <th>车型</th>
+              <th>驾驶员</th>
+              <th>事故场景</th>
+              <th>严重程度</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody id="caseBody"></tbody>
+        </table>
+      </div>
       <div class="empty" id="emptyState" style="display:none;">没有匹配的案例，请调整筛选条件。</div>
     </div>
   </div>
@@ -283,34 +269,640 @@
   <div class="modal-mask" id="modalMask">
     <div class="modal">
       <h2 id="modalTitle">案例详情</h2>
-      <p><strong>案例号：</strong><span id="dId"></span></p>
-      <p><strong>驾驶员年龄：</strong><span id="dAge"></span></p>
+      <p><strong>时间：</strong><span id="dTime"></span></p>
+      <p><strong>地点：</strong><span id="dLocation"></span></p>
       <p><strong>车型：</strong><span id="dCar"></span></p>
-      <p><strong>伤亡程度：</strong><span id="dCasualty"></span></p>
-      <p><strong>事故详情：</strong><span id="dDetail"></span></p>
+      <p><strong>驾驶员：</strong><span id="dDriver"></span></p>
+      <p><strong>事故场景：</strong><span id="dScene"></span></p>
+      <p><strong>事故原因：</strong><span id="dCause"></span></p>
+      <p><strong>严重程度：</strong><span id="dSeverity"></span></p>
+      <p><strong>经过：</strong><span id="dDesc"></span></p>
       <div class="close-row">
-        <button id="closeModalBtn">关闭</button>
+        <button class="btn-light" id="closeModalBtn" style="width:auto;">关闭</button>
       </div>
     </div>
   </div>
 
   <script>
-    let allCases = [];
+    let allCases = [
+  {
+    id: 1,
+    title: "案例1：江苏苏州小区倒车误踩油门，连撞3车1人受伤",
+    time: "2023年7月16日",
+    year: "2023",
+    location: "苏州市某居民小区内道路",
+    desc: "驾驶员在小区内准备倒车入位，因观察后方路况分心，本应踩刹车却猛踩油门，车辆突然加速向后冲，连续撞击后方停放的两辆轿车及一辆SUV，一名路过老人被剐蹭倒地受伤。",
+    car: "小型SUV",
+    driver: "59岁，女性，老年驾驶员",
+    scene: "小区道路、低速倒车、停车场景",
+    cause: "油门刹车混淆、注意力不集中",
+    severity: "1人轻伤，多车严重受损，一般事故"
+  },
+  {
+    id: 2,
+    title: "案例2：广东深圳地下车库起步误踩油门，冲撞墙体",
+    time: "2024年3月2日",
+    year: "2024",
+    location: "深圳南山区某商业综合体地下车库",
+    desc: "驾驶员驾车准备驶离车位，挂入D挡起步时错把油门当刹车，车辆瞬间冲出车位，高速撞向车库承重柱与墙面，车头严重溃缩，安全气囊全部弹出。",
+    car: "小型轿车",
+    driver: "62岁，男性，老年驾驶员",
+    scene: "地下车库、车辆起步、低速环境",
+    cause: "单踏板模式习惯、脚法混乱、误踩",
+    severity: "车辆报废，驾驶员轻微受伤"
+  },
+  {
+    id: 3,
+    title: "案例3：浙江杭州路口等红灯起步误踩，连撞护栏与电动车",
+    time: "2024年9月10日",
+    year: "2024",
+    location: "杭州市西湖区某十字路口",
+    desc: "车辆在路口等红灯，绿灯亮起起步时，驾驶员因紧张操作失误，猛踩油门而非刹车，车辆瞬间窜出，先撞断道路中心护栏，随后撞上正常直行的两轮电动车，骑车人被撞飞。",
+    car: "小型SUV",
+    driver: "24岁，女性，新手驾龄10个月",
+    scene: "城市路口、起步加速、人车混行",
+    cause: "驾驶经验不足、紧张慌乱、误操作",
+    severity: "电动车驾驶人骨折重伤，车辆严重损坏"
+  },
+  {
+    id: 4,
+    title: "案例4：上海小区门口挪车误踩油门，撞伤3名行人",
+    time: "2025年1月28日",
+    year: "2025",
+    location: "上海市浦东新区某小区出入口",
+    desc: "驾驶员在小区门口挪车调整车位，因腿脚反应变慢，踩踏板时判断失误，车辆突然加速冲出，连续撞倒3名正在步行的业主，其中两人年龄超65岁。",
+    car: "小型轿车",
+    driver: "67岁，男性，高龄驾驶员",
+    scene: "小区门口、挪车、人流密集",
+    cause: "反应速度下降、脚感弱化、误踩",
+    severity: "3人受伤，其中1人骨折，较大事故"
+  },
+  {
+    id: 5,
+    title: "案例5：四川成都停车场停车误踩油门，冲撞商店玻璃门",
+    time: "2025年5月19日",
+    year: "2025",
+    location: "成都市某商场室外停车场",
+    desc: "驾驶员准备驶入停车位，因距离判断偏差，慌乱中误踩油门，车辆直接冲破停车场护栏，撞入旁边便利店玻璃门，货架与商品大面积损毁。",
+    car: "微型轿车",
+    driver: "54岁，女性",
+    scene: "商场停车场、停车入位",
+    cause: "微型车踏板间距小、操作空间局促",
+    severity: "财产重大损失，无人伤亡"
+  },
+  {
+    id: 6,
+    title: "案例6：四川乐山停车场起步分心误踩油门，撞车伤人",
+    time: "2023年12月27日",
+    year: "2023",
+    location: "四川乐山马边县三九广场停车场",
+    desc: "驾驶员起步调整座椅分心，误踩油门，撞行人及车位内车辆，致1人受伤、两车受损。",
+    car: "小型轿车",
+    driver: "成人，分心驾驶",
+    scene: "停车场、车辆起步",
+    cause: "分心操作、油门刹车混淆",
+    severity: "1人受伤，两车受损，一般事故"
+  },
+  {
+    id: 7,
+    title: "案例7：江苏扬州停车场入口分心误踩油门，致4人受伤",
+    time: "2024年10月27日",
+    year: "2024",
+    location: "江苏扬州广陵区三湾公园停车场入口",
+    desc: "等候车位时制止孩子打闹分心，误踩油门，6秒连撞3车4行人，1名儿童重伤摘脾。",
+    car: "小型轿车",
+    driver: "成人，车内分心",
+    scene: "停车场入口、等候起步",
+    cause: "分心慌乱、误踩油门",
+    severity: "4人受伤（1人重伤），多车损毁，较大事故"
+  },
+  {
+    id: 8,
+    title: "案例8：重庆渝中区地下车库挪车误踩油门，连撞6车",
+    time: "2017年1月22日",
+    year: "2017",
+    location: "重庆渝中区和平大厦地下车库",
+    desc: "车库管理员帮车主挪车，对车型不熟且紧张，倒车误踩油门，连撞6车，损失超10万。",
+    car: "小型轿车",
+    driver: "63岁，男性，高龄+车况不熟",
+    scene: "地下车库、挪车倒车",
+    cause: "车况不熟、紧张误踩",
+    severity: "无人员伤亡，财产重大损失，一般事故"
+  },
+  {
+    id: 9,
+    title: "案例9：南京江宁区小区起步挂错档误踩油门，撞损财物",
+    time: "2025年3月31日",
+    year: "2025",
+    location: "南京江宁区某小区",
+    desc: "起步挂错档慌乱，混淆油门刹车，车辆前冲撞车棚立柱及电动车，仅造成财产损失。",
+    car: "小型轿车",
+    driver: "成人，操作慌乱",
+    scene: "小区道路、车辆起步",
+    cause: "挂错档+油门刹车混淆",
+    severity: "无人员伤亡，财产损失，一般事故"
+  },
+  {
+    id: 10,
+    title: "案例10：山西太原立体车库停车误踩油门，车辆冲出平台",
+    time: "2020年11月5日",
+    year: "2020",
+    location: "山西太原迎新街立体车库",
+    desc: "停车到位未刹车反踩油门，车辆撞碎玻璃冲出升降平台，悬于半空。",
+    car: "小型轿车",
+    driver: "成人，脚法失误",
+    scene: "立体车库、停车入位",
+    cause: "误踩油门、操作失误",
+    severity: "车辆严重受损，无人员伤亡，一般事故"
+  },
+  {
+    id: 11,
+    title: "案例11：江苏常州地库出口遇闸机误踩油门，冲撞民宅",
+    time: "2022年1月16日",
+    year: "2022",
+    location: "江苏常州某地下车库出口",
+    desc: "出库遇闸机未抬，想刹车误踩油门，车辆直冲对面民宅，无人员伤亡。",
+    car: "小型轿车",
+    driver: "女性，新手/紧张",
+    scene: "地库出口、坡道起步",
+    cause: "紧张慌乱、油门当刹车",
+    severity: "房屋与车辆受损，无伤亡，一般事故"
+  },
+  {
+    id: 12,
+    title: "案例12：浙江平阳新手右拐分心误踩油门，猛撞护栏",
+    time: "2024年3月26日",
+    year: "2024",
+    location: "浙江平阳昆阳镇某加油站旁",
+    desc: "新手驾新车分心，误踩油门猛撞护栏，车头严重受损。",
+    car: "小型轿车",
+    driver: "黄某，新手，驾龄短经验少",
+    scene: "道路右拐、减速路段",
+    cause: "经验不足、分心误操作",
+    severity: "车辆严重受损，无人员伤亡，一般事故"
+  },
+  {
+    id: 13,
+    title: "案例13：辽宁铁岭医院门口剐蹭后慌乱误踩油门，致1死1伤",
+    time: "2025年2月22日",
+    year: "2025",
+    location: "辽宁铁岭银州区某医院门口",
+    desc: "行车剐蹭后慌乱，误踩油门冲闯医院门厅，致1死1伤。",
+    car: "小型SUV",
+    driver: "王某，女性，慌乱操作",
+    scene: "医院门口、人流密集",
+    cause: "剐蹭慌乱、油门当刹车",
+    severity: "1死1伤，重大事故"
+  },
+  {
+    id: 14,
+    title: "案例14：广西南宁闹市路段起步误踩油门，连撞29人",
+    time: "2013年1月15日",
+    year: "2013",
+    location: "广西南宁高峰路闹市路段",
+    desc: "停车检查后起步，脚下打滑+车况不熟，误踩油门失控，连撞29人（3重伤26轻伤）。",
+    car: "小型SUV",
+    driver: "苏某，33岁，车况不熟",
+    scene: "城市主干道、人流密集",
+    cause: "脚滑失误、紧张误踩",
+    severity: "29人伤亡，特大事故"
+  },
+  {
+    id: 15,
+    title: "案例15：浙江温州新手倒车失败慌乱误踩油门，撞入店铺",
+    time: "2024年12月4日",
+    year: "2024",
+    location: "浙江温州瓯海区会龙路",
+    desc: "新司机倒车驶离车位多次失败，慌乱误踩油门，撞入店铺大门。",
+    car: "小型轿车",
+    driver: "范某，驾龄仅10天",
+    scene: "路边车位、倒车驶离",
+    cause: "新手经验不足、慌乱误踩",
+    severity: "车辆与店铺受损，无伤亡，一般事故"
+  },
+  {
+    id: 16,
+    title: "案例16：四川达州山顶倒车误踩油门，车辆冲下山崖",
+    time: "2018年11月25日",
+    year: "2018",
+    location: "四川达州达川区铜宝寨山顶",
+    desc: "山顶倒车误踩油门，车辆冲下百米山崖，被树木拦截，司机甩出车外无重伤。",
+    car: "小型轿车",
+    driver: "成人，操作失误",
+    scene: "山区道路、倒车",
+    cause: "油门当刹车、操作失控",
+    severity: "车辆报废，驾驶员轻伤，一般事故"
+  },
+  {
+    id: 17,
+    title: "案例17：海南海口倒车误踩油门，撞飞行人致1死1伤",
+    time: "2025年7月14日",
+    year: "2025",
+    location: "海南海口琼山区中山南路",
+    desc: "倒车误踩油门，冲向人行道撞飞2行人，致1死1伤、电动车损毁。",
+    car: "小型轿车",
+    driver: "成人，操作失误",
+    scene: "城市道路、倒车",
+    cause: "误踩油门、观察不周",
+    severity: "1死1伤，重大事故"
+  },
+  {
+    id: 18,
+    title: "案例18：黑龙江七台河SUV倒车误踩油门，连撞3车",
+    time: "2023年11月1日",
+    year: "2023",
+    location: "黑龙江七台河桃山区风采路",
+    desc: "SUV倒车时误踩油门，连续撞击路边停放3车，无人员伤亡。",
+    car: "大型SUV",
+    driver: "女性，操作失误",
+    scene: "城市道路、倒车",
+    cause: "油门刹车混淆",
+    severity: "多车受损，无伤亡，一般事故"
+  },
+  {
+    id: 19,
+    title: "案例19：重庆渝北实习女司机倒车误踩油门，碰伤指挥者",
+    time: "2024年8月7日",
+    year: "2024",
+    location: "重庆渝北区某酒店车库出口",
+    desc: "实习10天女司机倒车，误踩油门冲上绿化带，碰倒指挥的副驾人员致轻微伤。",
+    car: "小型SUV",
+    driver: "周某，实习新手",
+    scene: "车库出口、倒车",
+    cause: "新手紧张、误踩油门",
+    severity: "1人轻微伤，车辆受损，一般事故"
+  },
+  {
+    id: 20,
+    title: "案例20：南京江宁技校门口倒车入位误踩油门，撞损设施",
+    time: "2024年1月",
+    year: "2024",
+    location: "南京江宁淳化某技校门口",
+    desc: "倒车入位误把油门当刹车，车辆冲出车位撞路牙与绿化带，无人员伤亡。",
+    car: "小型客车",
+    driver: "庄某，成人",
+    scene: "路边车位、倒车入位",
+    cause: "操作失误、油门刹车混淆",
+    severity: "车辆受损，无伤亡，一般事故"
+  },
+  {
+    id: 21,
+    title: "案例21：重庆渝北着急送药分心倒车误踩油门，撞损设施",
+    time: "2025年5月30日",
+    year: "2025",
+    location: "重庆渝北区长翔支路",
+    desc: "着急送药分心，倒车误踩油门，撞倒消防指示牌，损失约3000元。",
+    car: "小型轿车",
+    driver: "张某，成人，心急分心",
+    scene: "城市道路、倒车",
+    cause: "心急分心、误踩油门",
+    severity: "财产损失，无伤亡，一般事故"
+  },
+  {
+    id: 22,
+    title: "案例22：广东佛山老年驾驶员倒车误踩油门，撞车伤人",
+    time: "2024年5月18日",
+    year: "2024",
+    location: "广东佛山禅城区某小区",
+    desc: "老年驾驶员倒车入位，腿脚反应慢，误踩油门撞2车及围墙，1人剐伤。",
+    car: "小型SUV",
+    driver: "65岁，男性",
+    scene: "小区道路、倒车",
+    cause: "反应下降、脚感弱化",
+    severity: "1人轻伤，多车受损，一般事故"
+  },
+  {
+    id: 23,
+    title: "案例23：北京朝阳地下车库单踏板模式误踩油门，车辆报废",
+    time: "2024年7月9日",
+    year: "2024",
+    location: "北京朝阳区某商场地下车库",
+    desc: "驾驶员驶离车位，单踏板模式脚法混乱，误踩油门撞承重柱，车头溃缩。",
+    car: "中型轿车",
+    driver: "58岁，男性",
+    scene: "地下车库、起步驶离",
+    cause: "单踏板习惯、脚法错乱",
+    severity: "车辆报废，驾驶员轻微伤，一般事故"
+  },
+  {
+    id: 24,
+    title: "案例24：武汉洪山路口新手起步紧张误踩油门，致人重伤",
+    time: "2024年8月21日",
+    year: "2024",
+    location: "湖北武汉洪山区路口",
+    desc: "绿灯起步紧张，误踩油门窜出，撞电动车及护栏，骑车人骨折。",
+    car: "小型轿车",
+    driver: "22岁，女性，驾龄8个月",
+    scene: "十字路口、起步",
+    cause: "新手紧张、操作失误",
+    severity: "1人重伤，车辆受损，较大事故"
+  },
+  {
+    id: 25,
+    title: "案例25：天津河西小区门口高龄司机挪车误踩油门，撞伤行人",
+    time: "2025年3月12日",
+    year: "2025",
+    location: "天津河西区小区门口",
+    desc: "高龄司机挪车调整车位，反应迟缓误踩油门，撞伤2名老年行人。",
+    car: "小型轿车",
+    driver: "71岁，男性",
+    scene: "小区门口、挪车",
+    cause: "高龄反应下降、误踩",
+    severity: "2人受伤，较大事故"
+  },
+  {
+    id: 26,
+    title: "案例26：西安雁塔微型车停车误踩油门，撞护栏岗亭",
+    time: "2025年6月8日",
+    year: "2025",
+    location: "陕西西安雁塔区室外停车场",
+    desc: "驾驶微型代步车停车，踏板间距小+操作局促，误踩油门撞护栏与岗亭。",
+    car: "微型轿车",
+    driver: "52岁，女性",
+    scene: "室外停车场、停车入位",
+    cause: "微型车踏板布局、空间局促",
+    severity: "财产损失，无伤亡，一般事故"
+  },
+  {
+    id: 27,
+    title: "案例27：青岛李沧接电话分心倒车误踩油门，撞车损物",
+    time: "2024年4月10日",
+    year: "2024",
+    location: "山东青岛李沧区某小区",
+    desc: "驾驶员接电话分心，倒车误踩油门，撞1车及花坛，无人员伤亡。",
+    car: "小型SUV",
+    driver: "42岁，女性，分心驾驶",
+    scene: "小区道路、倒车",
+    cause: "接听电话分心、误踩",
+    severity: "车辆受损，一般事故"
+  },
+  {
+    id: 28,
+    title: "案例28：深圳宝安产业园车库新手停车慌乱误踩油门，车损严重",
+    time: "2024年6月3日",
+    year: "2024",
+    location: "深圳宝安区产业园车库",
+    desc: "停车时距离判断偏差，慌乱误踩油门，撞墙面与消防栓，车辆严重受损。",
+    car: "小型SUV",
+    driver: "26岁，男性，新手",
+    scene: "地下车库、停车",
+    cause: "经验不足、慌乱误踩",
+    severity: "车辆严重受损，一般事故"
+  },
+  {
+    id: 29,
+    title: "案例29：杭州上城跟车过近应急慌乱误踩油门，追尾伤人",
+    time: "2025年1月9日",
+    year: "2025",
+    location: "杭州上城区路口",
+    desc: "跟车过近遇前车急刹，慌乱中错踩油门，追尾前车，2人轻微伤。",
+    car: "小型轿车",
+    driver: "35岁，女性",
+    scene: "城市道路、跟车行驶",
+    cause: "应急慌乱、油门刹车混淆",
+    severity: "2人轻微伤，两车受损，一般事故"
+  },
+  {
+    id: 30,
+    title: "案例30：广州白云老旧小区老年司机转弯误踩油门，撞墙损物",
+    time: "2025年4月5日",
+    year: "2025",
+    location: "广州白云区某老旧小区",
+    desc: "老年驾驶员出库转弯观察不周+脚法失误，误踩油门撞围墙与杂物。",
+    car: "小型轿车",
+    driver: "66岁，男性",
+    scene: "老旧小区、窄路转弯",
+    cause: "观察不足、脚感下降",
+    severity: "车辆与围墙受损，一般事故"
+  },
+  {
+    id: 31,
+    title: "案例31：成都锦江新能源车主模式不适应起步误踩油门，撞损设施",
+    time: "2024年9月3日",
+    year: "2024",
+    location: "成都锦江区商场车库",
+    desc: "新能源车主切换驾驶模式不适应，起步误踩油门，撞护栏与垃圾桶。",
+    car: "微型轿车",
+    driver: "31岁，女性",
+    scene: "地下车库、起步",
+    cause: "模式不适应、操作错乱",
+    severity: "财产损失，一般事故"
+  },
+  {
+    id: 32,
+    title: "案例32：苏州昆山弯腰捡物分心倒车误踩油门，连撞两车",
+    time: "2025年2月17日",
+    year: "2025",
+    location: "苏州昆山市小区道路",
+    desc: "驾驶员弯腰捡物品分心，倒车误踩油门，连续撞2车，无人员伤亡。",
+    car: "小型SUV",
+    driver: "45岁，男性",
+    scene: "小区道路、倒车",
+    cause: "弯腰分心、误踩油门",
+    severity: "两车受损，一般事故"
+  },
+  {
+    id: 33,
+    title: "案例33：重庆江北步行街入口新手起步紧张误踩油门，撞伤行人",
+    time: "2024年11月20日",
+    year: "2024",
+    location: "重庆江北区步行街入口",
+    desc: "人流密集路段起步，紧张误踩油门，撞2名行人及护栏。",
+    car: "小型轿车",
+    driver: "23岁，女性，驾龄6个月",
+    scene: "步行街入口、起步",
+    cause: "新手紧张、误踩",
+    severity: "2人轻伤，较大事故"
+  },
+  {
+    id: 34,
+    title: "案例34：武汉硚口立体车库脚位不当误触油门，冲撞设备",
+    time: "2025年5月2日",
+    year: "2025",
+    location: "武汉硚口区立体车库",
+    desc: "停车取卡时脚未离开油门，误触导致车辆前冲撞设备，无人员伤亡。",
+    car: "中型轿车",
+    driver: "55岁，男性",
+    scene: "立体车库、停车取卡",
+    cause: "脚位不当、误触油门",
+    severity: "设备与车辆受损，一般事故"
+  },
+  {
+    id: 35,
+    title: "案例35：上海浦东调整后视镜分心挪车误踩油门，撞伤行人",
+    time: "2024年1月28日",
+    year: "2024",
+    location: "上海浦东新区某小区",
+    desc: "驾驶员调整后视镜分心，挪车误踩油门，撞伤1名行人，车辆剐蹭墙体。",
+    car: "小型轿车",
+    driver: "64岁，男性",
+    scene: "小区内、挪车",
+    cause: "分心+反应下降、误踩",
+    severity: "1人受伤，一般事故"
+  }
+];
 
-    const state = { keyword: "", car: "全部", casualty: "全部" };
+    const state = {
+      year: "全部",
+      scene: "全部",
+      level: "全部"
+    };
 
-    const keywordEl = document.getElementById("keyword");
-    const carFilterEl = document.getElementById("carFilter");
-    const casualtyFilterEl = document.getElementById("casualtyFilter");
-    const fileImportEl = document.getElementById("fileImport");
-    const caseGridEl = document.getElementById("caseGrid");
-    const emptyEl = document.getElementById("emptyState");
+    const yearFilter = document.getElementById("yearFilter");
+    const sceneFilter = document.getElementById("sceneFilter");
+    const levelFilter = document.getElementById("levelFilter");
+    const caseBody = document.getElementById("caseBody");
+    const emptyState = document.getElementById("emptyState");
+    const carDist = document.getElementById("carDist");
+    const ageDist = document.getElementById("ageDist");
+    const sceneDist = document.getElementById("sceneDist");
 
-    function normalizeKey(key) {
-      return String(key || "")
-        .replace(/^\uFEFF/, "")
-        .replace(/[\s\u3000]+/g, "")
-        .trim();
+    function getSeverityGroup(text) {
+      if (text.includes("骨折") || text.includes("重伤") || text.includes("较大事故")) return "重伤/较大";
+      if (text.includes("轻伤") || text.includes("受伤")) return "轻伤";
+      if (text.includes("财产")) return "财产损失";
+      return "其他";
+    }
+
+    function severityTagClass(group) {
+      if (group === "重伤/较大") return "tag-high";
+      if (group === "轻伤") return "tag-mid";
+      return "tag-low";
+    }
+
+    function setupOptions() {
+      yearFilter.innerHTML = "";
+      sceneFilter.innerHTML = "";
+      levelFilter.innerHTML = "";
+      const years = ["全部", ...new Set(allCases.map(item => item.year))];
+      const scenes = ["全部", ...new Set(allCases.map(item => item.scene.split("、")[0]))];
+      const levels = ["全部", ...new Set(allCases.map(item => getSeverityGroup(item.severity)))];
+
+      years.forEach(y => yearFilter.add(new Option(y, y)));
+      scenes.forEach(s => sceneFilter.add(new Option(s, s)));
+      levels.forEach(l => levelFilter.add(new Option(l, l)));
+    }
+
+    function getCarCategory(text) {
+      const inParen = text.match(/（([^）]+)）/);
+      if (inParen && inParen[1]) return inParen[1];
+      return text;
+    }
+
+    function getAgeGroup(driverText) {
+      const ageMatch = driverText.match(/(\d+)\s*岁/);
+      if (!ageMatch) return "未知";
+      const age = Number(ageMatch[1]);
+      if (age < 30) return "30岁以下";
+      if (age < 45) return "30-44岁";
+      if (age < 60) return "45-59岁";
+      return "60岁及以上";
+    }
+
+    function countBy(list, keyFn) {
+      const out = {};
+      list.forEach(item => {
+        const key = keyFn(item);
+        out[key] = (out[key] || 0) + 1;
+      });
+      return out;
+    }
+
+    function renderDist(el, countMap, total) {
+      el.innerHTML = "";
+      const entries = Object.entries(countMap).sort((a, b) => b[1] - a[1]);
+      if (!entries.length) {
+        el.innerHTML = '<div class="empty" style="padding:8px 0;">暂无数据</div>';
+        return;
+      }
+      entries.forEach(([name, count]) => {
+        const pct = total ? Math.round((count / total) * 100) : 0;
+        const row = document.createElement("div");
+        row.className = "dist-row";
+        row.innerHTML = `
+          <span class="dist-label" title="${name}">${name}</span>
+          <span class="dist-bar-wrap"><span class="dist-bar" style="width:${pct}%"></span></span>
+          <span class="dist-val">${count} (${pct}%)</span>
+        `;
+        el.appendChild(row);
+      });
+    }
+
+    function getFilteredCases() {
+      return allCases.filter(item => {
+        const sceneHead = item.scene.split("、")[0];
+        const level = getSeverityGroup(item.severity);
+        return (state.year === "全部" || item.year === state.year)
+          && (state.scene === "全部" || sceneHead === state.scene)
+          && (state.level === "全部" || level === state.level);
+      });
+    }
+
+    function renderKpis(list) {
+      document.getElementById("kpiTotal").textContent = list.length;
+      document.getElementById("kpiInjury").textContent = list.filter(x => x.severity.includes("受伤") || x.severity.includes("骨折")).length;
+      document.getElementById("kpiSenior").textContent = list.filter(x => x.driver.includes("老年") || x.driver.includes("高龄")).length;
+
+      const freq = {};
+      list.forEach(x => {
+        const key = x.scene.split("、")[0];
+        freq[key] = (freq[key] || 0) + 1;
+      });
+      const top = Object.entries(freq).sort((a, b) => b[1] - a[1])[0];
+      document.getElementById("kpiTopScene").textContent = top ? top[0] : "-";
+    }
+
+    function openDetail(item) {
+      document.getElementById("modalTitle").textContent = item.title;
+      document.getElementById("dTime").textContent = item.time;
+      document.getElementById("dLocation").textContent = item.location;
+      document.getElementById("dCar").textContent = item.car;
+      document.getElementById("dDriver").textContent = item.driver;
+      document.getElementById("dScene").textContent = item.scene;
+      document.getElementById("dCause").textContent = item.cause;
+      document.getElementById("dSeverity").textContent = item.severity;
+      document.getElementById("dDesc").textContent = item.desc;
+      document.getElementById("modalMask").style.display = "flex";
+    }
+
+    function renderTable(list) {
+      caseBody.innerHTML = "";
+      if (!list.length) {
+        emptyState.style.display = "block";
+        return;
+      }
+      emptyState.style.display = "none";
+      list.forEach(item => {
+        const row = document.createElement("tr");
+        const level = getSeverityGroup(item.severity);
+        row.innerHTML = `
+          <td>${item.time}</td>
+          <td>${item.location}</td>
+          <td>${item.car}</td>
+          <td>${item.driver}</td>
+          <td>${item.scene}</td>
+          <td><span class="tag ${severityTagClass(level)}">${level}</span></td>
+          <td><button class="link-btn" data-id="${item.id}">查看详情</button></td>
+        `;
+        caseBody.appendChild(row);
+      });
+    }
+
+    function renderDistributions(list) {
+      const total = list.length;
+      const carMap = countBy(list, item => getCarCategory(item.car));
+      const ageMap = countBy(list, item => getAgeGroup(item.driver));
+      const sceneMap = countBy(list, item => item.scene.split("、")[0]);
+      renderDist(carDist, carMap, total);
+      renderDist(ageDist, ageMap, total);
+      renderDist(sceneDist, sceneMap, total);
+    }
+
+    function render() {
+      const filtered = getFilteredCases();
+      renderKpis(filtered);
+      renderDistributions(filtered);
+      renderTable(filtered);
     }
 
     function pickField(row, keys) {
@@ -322,384 +914,101 @@
       return "";
     }
 
-    function casualtyGroup(text) {
-      const value = String(text || "");
-      if (value.includes("死亡") || value.includes("亡")) return "死亡";
-      if (value.includes("重伤") || value.includes("受伤") || value.includes("伤")) return "受伤";
-      if (value.includes("无伤") || value.includes("无人伤亡")) return "无伤亡";
-      return "其他";
+    function normalizeExcelRow(row) {
+      const normalized = {};
+      Object.keys(row).forEach(key => {
+        normalized[String(key).replace(/\s+/g, "").trim()] = row[key];
+      });
+      return normalized;
     }
 
-    function casualtyClass(group) {
-      if (group === "死亡") return "chip-loss-high";
-      if (group === "受伤") return "chip-loss-mid";
-      return "chip-loss-low";
-    }
-
-    const AGE_BUCKET_ORDER = ["≤29岁", "30–39岁", "40–49岁", "50–59岁", "60–69岁", "≥70岁", "未知"];
-
-    function parseAgeValue(raw) {
-      if (raw === undefined || raw === null || raw === "") return null;
-      if (typeof raw === "number" && !Number.isNaN(raw) && raw > 0 && raw < 120) return Math.round(raw);
-      const s = String(raw).trim();
-      if (!s) return null;
-      const num = Number(s);
-      if (!Number.isNaN(num) && num > 0 && num < 120) return Math.round(num);
-      const m = s.match(/^(\d{1,2})\s*(?:岁|周岁)?$/);
-      if (m) {
-        const n = parseInt(m[1], 10);
-        if (n >= 10 && n <= 99) return n;
-      }
-      return null;
-    }
-
-    function parseAgeFromText(text) {
-      const s = String(text || "");
-      const patterns = [
-        /(?:驾驶员|司机|驾驶人|当事人)?\s*(?:年龄|岁数)\s*[：:\s]\s*(\d{1,2})\s*(?:岁|周岁)?/,
-        /(\d{1,2})\s*周岁/,
-        /(\d{1,2})\s*岁(?!\s*[年月日])/,
-      ];
-      for (const re of patterns) {
-        const m = s.match(re);
-        if (m) {
-          const n = parseInt(m[1], 10);
-          if (n >= 16 && n <= 99) return n;
-        }
-      }
-      return null;
-    }
-
-    function resolveDriverAge(ageRaw, titleText, detailText) {
-      let y = parseAgeValue(ageRaw);
-      if (y != null) return y;
-      y = parseAgeFromText(titleText || "");
-      if (y != null) return y;
-      return parseAgeFromText(detailText || "");
-    }
-
-    function ageBucketFromYears(age) {
-      if (age == null || Number.isNaN(age)) return "未知";
-      const a = Math.round(Number(age));
-      if (a <= 29) return "≤29岁";
-      if (a <= 39) return "30–39岁";
-      if (a <= 49) return "40–49岁";
-      if (a <= 59) return "50–59岁";
-      if (a <= 69) return "60–69岁";
-      return "≥70岁";
-    }
-
-    /** 与《误踩油门事故案例数据集》一致；可选列「驾驶员年龄」用于统计图表 */
     function toCaseItem(rawRow, index) {
-      const row = {};
-      Object.keys(rawRow).forEach(key => { row[normalizeKey(key)] = rawRow[key]; });
-      const idRaw = pickField(row, ["案例号", "序号", "ID", "id", "caseid", "编号"]);
-      const titleRaw = pickField(row, ["标题", "案例标题", "title"]);
-      const detailRaw = pickField(row, ["事故详情", "详情", "事故描述", "description"]);
-      const carRaw = pickField(row, ["车型", "车辆类型", "车辆型号", "car"]);
-      const casualtyRaw = pickField(row, ["伤亡程度", "伤亡", "严重程度", "casualty"]);
-      const ageRaw = pickField(row, ["驾驶员年龄", "司机年龄", "驾驶人年龄", "年龄"]);
-      const idDisplay = idRaw !== "" ? idRaw : String(index + 1);
-      const title = titleRaw || (idRaw !== "" ? `案例 ${idRaw}` : `案例 ${index + 1}`);
-      const ageYears = resolveDriverAge(ageRaw, titleRaw || title, detailRaw);
-      const ageBucket = ageBucketFromYears(ageYears);
+      const row = normalizeExcelRow(rawRow);
+      const time = pickField(row, ["时间", "事故时间", "date", "time"]);
+      const yearField = pickField(row, ["年份", "year"]);
+      const matchedYear = time.match(/(20\d{2})/);
+      const year = yearField || (matchedYear ? matchedYear[1] : "未知");
+      const location = pickField(row, ["地点", "事故地点", "location", "地址"]) || "未提供";
+      const car = pickField(row, ["车型", "车型品牌", "car", "车辆"]) || "未提供";
+      const driver = pickField(row, ["驾驶员", "驾驶员信息", "driver", "年龄性别"]) || "未提供";
+      const scene = pickField(row, ["事故场景", "场景", "scene"]) || "未提供";
+      const cause = pickField(row, ["事故原因", "原因", "cause"]) || "未提供";
+      const severity = pickField(row, ["严重程度", "等级", "severity"]) || "未提供";
+      const desc = pickField(row, ["经过", "事故经过", "描述", "desc", "详情"]) || "未提供";
+      const title = pickField(row, ["标题", "案例标题", "title"]) || `案例${index + 1}`;
+
       return {
-        uid: `r${index}`,
-        id: idDisplay,
+        id: index + 1,
         title,
-        detail: detailRaw || "",
-        car: carRaw || "未提供车型",
-        casualty: casualtyRaw || "未提供",
-        ageYears,
-        ageBucket,
+        time: time || "未提供",
+        year,
+        location,
+        desc,
+        car,
+        driver,
+        scene,
+        cause,
+        severity
       };
-    }
-
-    function rowHasContent(item) {
-      const meaningful = [item.title, item.detail, item.car, item.casualty].filter(
-        v => v && !/^未提供/.test(v)
-      );
-      return meaningful.length > 0;
-    }
-
-    let chartAgeInst = null;
-    let chartCarInst = null;
-
-    function aggregateCarLabelsCounts(list, topN = 12) {
-      const count = {};
-      list.forEach(item => {
-        const k = item.car || "未提供车型";
-        count[k] = (count[k] || 0) + 1;
-      });
-      const entries = Object.entries(count).sort((a, b) => b[1] - a[1]);
-      if (entries.length <= topN) {
-        return {
-          labels: entries.map(e => e[0]),
-          counts: entries.map(e => e[1]),
-        };
-      }
-      const top = entries.slice(0, topN);
-      const otherSum = entries.slice(topN).reduce((s, [, c]) => s + c, 0);
-      return {
-        labels: [...top.map(e => e[0]), "其他"],
-        counts: [...top.map(e => e[1]), otherSum],
-      };
-    }
-
-    function renderCharts(list) {
-      const hintEl = document.getElementById("ageChartHint");
-      const canvasAge = document.getElementById("chartAge");
-      const canvasCar = document.getElementById("chartCar");
-      if (!canvasAge || !canvasCar || !window.Chart) return;
-
-      const bucketCounts = Object.fromEntries(AGE_BUCKET_ORDER.map(b => [b, 0]));
-      let knownAge = 0;
-      list.forEach(item => {
-        const b = item.ageBucket && bucketCounts[item.ageBucket] !== undefined
-          ? item.ageBucket
-          : "未知";
-        bucketCounts[b]++;
-        if (item.ageYears != null) knownAge++;
-      });
-
-      if (chartAgeInst) {
-        chartAgeInst.destroy();
-        chartAgeInst = null;
-      }
-      if (chartCarInst) {
-        chartCarInst.destroy();
-        chartCarInst = null;
-      }
-
-      const ageData = AGE_BUCKET_ORDER.map(k => bucketCounts[k]);
-      chartAgeInst = new Chart(canvasAge, {
-        type: "bar",
-        data: {
-          labels: AGE_BUCKET_ORDER,
-          datasets: [{
-            label: "案例数",
-            data: ageData,
-            backgroundColor: AGE_BUCKET_ORDER.map((_, i) =>
-              `hsl(${226 - i * 10}, 72%, ${56 - i * 3}%)`
-            ),
-            borderRadius: 6,
-          }],
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: true,
-          plugins: { legend: { display: false } },
-          scales: {
-            y: {
-              beginAtZero: true,
-              ticks: { precision: 0 },
-            },
-            x: {
-              ticks: { maxRotation: 40, minRotation: 0 },
-            },
-          },
-        },
-      });
-
-      const { labels: carLabels, counts: carCounts } = aggregateCarLabelsCounts(list, 12);
-      chartCarInst = new Chart(canvasCar, {
-        type: "bar",
-        data: {
-          labels: carLabels,
-          datasets: [{
-            label: "案例数",
-            data: carCounts,
-            backgroundColor: "rgba(37, 99, 235, 0.75)",
-            borderRadius: 4,
-          }],
-        },
-        options: {
-          indexAxis: "y",
-          responsive: true,
-          maintainAspectRatio: true,
-          plugins: { legend: { display: false } },
-          scales: {
-            x: {
-              beginAtZero: true,
-              ticks: { precision: 0 },
-            },
-          },
-        },
-      });
-
-      if (!list.length) {
-        hintEl.textContent = "暂无筛选结果：导入数据或放宽筛选后可查看分布。";
-      } else if (knownAge === 0) {
-        hintEl.textContent =
-          "当前结果未识别到年龄：请在 Excel 中增加「驾驶员年龄」列，或在标题/详情中用「××岁」「年龄：××」等形式标注。";
-      } else {
-        hintEl.textContent =
-          `已解析年龄的案例 ${knownAge} 条（来自列或文本）；其余计入「未知」分段。`;
-      }
-    }
-
-    function parseWorkbookBuffer(buffer) {
-      if (!window.XLSX) return 0;
-      const wb = XLSX.read(buffer, { type: "array" });
-      const sheet = wb.Sheets[wb.SheetNames[0]];
-      const rows = XLSX.utils.sheet_to_json(sheet, { defval: "", raw: false });
-      const parsed = rows
-        .map((row, idx) => toCaseItem(row, idx))
-        .filter(item => rowHasContent(item));
-      if (parsed.length) {
-        allCases = parsed;
-      }
-      return parsed.length;
     }
 
     async function tryLoadExcelData() {
       if (!window.XLSX) return;
       const candidates = [
-        "误踩油门事故案例数据集.xlsx",
         "误踩油门事故案例分析数据集.xlsx",
         "误踩油门事故案例分析数据集.xls"
       ];
+
       for (const fileName of candidates) {
         try {
           const response = await fetch(fileName);
           if (!response.ok) continue;
           const buffer = await response.arrayBuffer();
-          if (parseWorkbookBuffer(buffer)) return;
+          const wb = XLSX.read(buffer, { type: "array" });
+          const firstSheet = wb.Sheets[wb.SheetNames[0]];
+          const rows = XLSX.utils.sheet_to_json(firstSheet, { defval: "" });
+          if (!rows.length) continue;
+          const parsed = rows.map((row, idx) => toCaseItem(row, idx));
+          if (parsed.length) {
+            allCases = parsed;
+            return;
+          }
         } catch (_) {
-          // ignore this candidate (e.g. file:// CORS / network)
+          // Ignore and continue fallback candidates.
         }
       }
     }
 
-    function setupFilters() {
-      carFilterEl.innerHTML = "";
-      casualtyFilterEl.innerHTML = "";
-      const carOptions = ["全部", ...new Set(allCases.map(item => item.car))];
-      const casualtyOptions = ["全部", ...new Set(allCases.map(item => casualtyGroup(item.casualty)))];
-      carOptions.forEach(item => carFilterEl.add(new Option(item, item)));
-      casualtyOptions.forEach(item => casualtyFilterEl.add(new Option(item, item)));
-    }
-
-    function getFilteredCases() {
-      const kw = state.keyword.trim().toLowerCase();
-      return allCases.filter(item => {
-        const matchesKeyword = !kw || item.title.toLowerCase().includes(kw) || item.detail.toLowerCase().includes(kw);
-        const matchesCar = state.car === "全部" || item.car === state.car;
-        const matchesCasualty = state.casualty === "全部" || casualtyGroup(item.casualty) === state.casualty;
-        return matchesKeyword && matchesCar && matchesCasualty;
-      });
-    }
-
-    function renderKpis(list) {
-      document.getElementById("kpiTotal").textContent = list.length;
-      document.getElementById("kpiCarTypes").textContent = new Set(list.map(item => item.car)).size;
-      document.getElementById("kpiInjury").textContent = list.filter(item => {
-        const g = casualtyGroup(item.casualty);
-        return g === "受伤" || g === "死亡";
-      }).length;
-
-      const countMap = {};
-      list.forEach(item => { countMap[item.car] = (countMap[item.car] || 0) + 1; });
-      const topCar = Object.entries(countMap).sort((a, b) => b[1] - a[1])[0];
-      document.getElementById("kpiTopCar").textContent = topCar ? topCar[0] : "-";
-    }
-
-    function openDetail(item) {
-      document.getElementById("modalTitle").textContent = item.title;
-      document.getElementById("dId").textContent = item.id;
-      document.getElementById("dAge").textContent =
-        item.ageYears != null
-          ? `${item.ageYears} 岁（${item.ageBucket || ageBucketFromYears(item.ageYears)}）`
-          : "未识别（可补充「驾驶员年龄」列或在详情中写明年龄）";
-      document.getElementById("dCar").textContent = item.car;
-      document.getElementById("dCasualty").textContent = item.casualty;
-      document.getElementById("dDetail").textContent = item.detail || "（未填写）";
-      document.getElementById("modalMask").style.display = "flex";
-    }
-
-    function renderCaseCards(list) {
-      caseGridEl.innerHTML = "";
-      if (!list.length) {
-        emptyEl.style.display = "block";
-        emptyEl.textContent = allCases.length
-          ? "没有匹配的案例，请调整筛选条件。"
-          : "暂无案例数据：请在上方的「导入数据集」处选择 Excel 文件。";
-        return;
-      }
-      emptyEl.style.display = "none";
-      list.forEach(item => {
-        const group = casualtyGroup(item.casualty);
-        const card = document.createElement("article");
-        card.className = "case-card";
-        card.innerHTML = `
-          <div class="case-head">
-            <h3 class="case-title">${item.title}</h3>
-            <span class="case-id">案例号 ${item.id}</span>
-          </div>
-          <div class="meta">
-            <span class="chip">${item.car}</span>
-            <span class="chip ${casualtyClass(group)}">${group}</span>
-          </div>
-          <p class="detail">${item.detail ? `${item.detail.slice(0, 88)}${item.detail.length > 88 ? "..." : ""}` : "（暂无详情）"}</p>
-          <button class="link-btn" data-uid="${item.uid}">查看完整详情</button>
-        `;
-        caseGridEl.appendChild(card);
-      });
-    }
-
-    function render() {
-      const filtered = getFilteredCases();
-      renderKpis(filtered);
-      renderCharts(filtered);
-      renderCaseCards(filtered);
-    }
-
     document.getElementById("applyBtn").addEventListener("click", () => {
-      state.keyword = keywordEl.value;
-      state.car = carFilterEl.value;
-      state.casualty = casualtyFilterEl.value;
+      state.year = yearFilter.value;
+      state.scene = sceneFilter.value;
+      state.level = levelFilter.value;
       render();
     });
 
     document.getElementById("resetBtn").addEventListener("click", () => {
-      state.keyword = "";
-      state.car = "全部";
-      state.casualty = "全部";
-      keywordEl.value = "";
-      carFilterEl.value = "全部";
-      casualtyFilterEl.value = "全部";
+      yearFilter.value = "全部";
+      sceneFilter.value = "全部";
+      levelFilter.value = "全部";
+      state.year = "全部";
+      state.scene = "全部";
+      state.level = "全部";
       render();
     });
 
-    fileImportEl.addEventListener("change", async event => {
-      const file = event.target.files && event.target.files[0];
-      if (!file || !window.XLSX) return;
-      try {
-        const buffer = await file.arrayBuffer();
-        const n = parseWorkbookBuffer(buffer);
-        if (!n) {
-          alert("未能从所选文件中解析出有效案例行，请确认首行为表头（案例号、标题、伤亡程度、事故详情、车型；可选「驾驶员年龄」）且表格有数据。");
-        }
-        setupFilters();
-        render();
-      } catch (err) {
-        alert("读取 Excel 失败，请确认文件未被占用且格式为 .xlsx / .xls。");
-      }
-      event.target.value = "";
-    });
-
-    caseGridEl.addEventListener("click", event => {
-      const btn = event.target.closest("button[data-uid]");
+    caseBody.addEventListener("click", (event) => {
+      const btn = event.target.closest("button[data-id]");
       if (!btn) return;
-      const uid = btn.dataset.uid;
-      const item = allCases.find(x => x.uid === uid);
+      const id = Number(btn.dataset.id);
+      const item = allCases.find(x => x.id === id);
       if (item) openDetail(item);
     });
 
     document.getElementById("closeModalBtn").addEventListener("click", () => {
       document.getElementById("modalMask").style.display = "none";
     });
-    document.getElementById("modalMask").addEventListener("click", event => {
+
+    document.getElementById("modalMask").addEventListener("click", (event) => {
       if (event.target.id === "modalMask") {
         document.getElementById("modalMask").style.display = "none";
       }
@@ -707,9 +1016,10 @@
 
     async function init() {
       await tryLoadExcelData();
-      setupFilters();
+      setupOptions();
       render();
     }
+
     init();
   </script>
 </body>
