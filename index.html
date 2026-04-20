@@ -1460,15 +1460,15 @@
     const sceneDist = document.getElementById("sceneDist");
 
     function getSeverityGroup(text) {
-      if (text.includes("骨折") || text.includes("重伤") || text.includes("较大事故")) return "重伤/较大";
-      if (text.includes("轻伤") || text.includes("受伤")) return "轻伤";
+      if (text.includes("骨折") || text.includes("重伤") || text.includes("较大事故")) return "重大/特大";
+      if (text.includes("轻伤") || text.includes("受伤")) return "一般/轻微";
       if (text.includes("财产")) return "财产损失";
       return "其他";
     }
 
     function severityTagClass(group) {
-      if (group === "重伤/较大") return "tag-high";
-      if (group === "轻伤") return "tag-mid";
+      if (group === "重大/特大") return "tag-high";
+      if (group === "一般/轻微") return "tag-mid";
       return "tag-low";
     }
 
