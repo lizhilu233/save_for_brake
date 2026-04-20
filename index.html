@@ -1466,10 +1466,14 @@
       return "其他";
     }
 
-    function severityTagClass(group) {
-      if (group === "重大/特大") return "tag-high";
-      if (group === "一般/轻微") return "tag-mid";
-      return "tag-low";
+    function severityTagClass(severity) {
+      if (severity === "重大" || severity === "特大") {
+        return "tag-high";
+      } else if (severity === "轻微") {
+        return "tag-mid";
+      } else {
+        return "tag-low";
+      }
     }
 
     function setupOptions() {
@@ -1533,7 +1537,7 @@
     function getFilteredCases() {
       return allCases.filter(item => {
         const sceneHead = item.scene.split("、")[0];
-        const level = getSeverityGroup(item.severity);
+        const level = item.severity;
         return (state.year === "全部" || item.year === state.year)
           && (state.scene === "全部" || sceneHead === state.scene)
           && (state.level === "全部" || level === state.level);
@@ -1576,7 +1580,7 @@
       emptyState.style.display = "none";
       list.forEach(item => {
         const row = document.createElement("tr");
-        const level = getSeverityGroup(item.severity);
+        const level = item.severity;
         row.innerHTML = `
           <td>${item.time}</td>
           <td>${item.location}</td>
