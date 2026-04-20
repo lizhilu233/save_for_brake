@@ -222,7 +222,9 @@
     <div class="panel">
       <div class="kpi">
         <div class="kpi-item"><p>案例总数</p><h3 id="kpiTotal">0</h3></div>
-        <div class="kpi-item"><p>伤人事故数</p><h3 id="kpiInjury">0</h3></div>
+        <!-- <div class="kpi-item"><p>伤人事故数</p><h3 id="kpiInjury">0</h3></div> -->
+        <div class="kpi-item"><p>死亡事故数</p><h3 id="kpiDeaths">0</h3></div>
+        <div class="kpi-item"><p>受伤事故数</p><h3 id="kpiInjuries">0</h3></div>
         <div class="kpi-item"><p>老年驾驶员案例</p><h3 id="kpiSenior">0</h3></div>
         <div class="kpi-item"><p>高频场景</p><h3 id="kpiTopScene">-</h3></div>
       </div>
@@ -284,7 +286,7 @@
   </div>
 
   <script>
-    let allCases = [
+    let allCases =[
   {
     "id": 1,
     "title": "案例1：广西南宁闹市路段起步误踩油门，连撞29人",
@@ -296,7 +298,9 @@
     "driver": "苏某，33岁，车况不熟",
     "scene": "城市主干道、人流密集",
     "cause": "脚滑失误、紧张误踩",
-    "severity": "特大"
+    "severity": "特大",
+    "deaths": 0,
+    "injuries": 29
   },
   {
     "id": 2,
@@ -309,7 +313,9 @@
     "driver": "董某（驾校学员，无独立驾驶资格，驾培阶段学员）",
     "scene": "驾校训练场地、低速练习环境、人员密集的练车场景",
     "cause": "学员驾驶经验不足、紧张慌乱导致油门刹车混淆误操作；教练擅自离岗，未履行安全监督义务，未及时干预制止",
-    "severity": "重大"
+    "severity": "重大",
+    "deaths": 1,
+    "injuries": 3
   },
   {
     "id": 3,
@@ -322,7 +328,9 @@
     "driver": "王某，女性，普通家用车驾驶员",
     "scene": "小区停车场、低速停车场景",
     "cause": "停车操作失误、油门刹车混淆、注意力不集中",
-    "severity": "重大"
+    "severity": "重大",
+    "deaths": 1,
+    "injuries": 0
   },
   {
     "id": 4,
@@ -335,7 +343,9 @@
     "driver": "小丽，女性，新手驾驶员（领证仅2个月）",
     "scene": "临街店铺门前、低速停车场景",
     "cause": "驾驶经验不足、操作不熟练、油门刹车混淆、紧张慌乱",
-    "severity": "重大"
+    "severity": "重大",
+    "deaths": 1,
+    "injuries": 1
   },
   {
     "id": 5,
@@ -348,7 +358,9 @@
     "driver": "63岁，男性，高龄+车况不熟",
     "scene": "地下车库、挪车倒车",
     "cause": "车况不熟、紧张误踩",
-    "severity": "重大"
+    "severity": "重大",
+    "deaths": 0,
+    "injuries": 0
   },
   {
     "id": 6,
@@ -361,7 +373,9 @@
     "driver": "成人，操作失误",
     "scene": "山区道路、倒车",
     "cause": "油门当刹车、操作失控",
-    "severity": "一般"
+    "severity": "一般",
+    "deaths": 0,
+    "injuries": 0
   },
   {
     "id": 7,
@@ -374,7 +388,9 @@
     "driver": "朱某，女性，穿高跟鞋",
     "scene": "倒车、临街店铺",
     "cause": "穿高跟鞋、油门刹车混淆",
-    "severity": "一般"
+    "severity": "一般",
+    "deaths": 0,
+    "injuries": 1
   },
   {
     "id": 8,
@@ -387,7 +403,9 @@
     "driver": "陈某",
     "scene": "小区停车场",
     "cause": "误将油门当刹车",
-    "severity": "一般"
+    "severity": "一般",
+    "deaths": 0,
+    "injuries": 0
   },
   {
     "id": 9,
@@ -400,7 +418,9 @@
     "driver": "成人，脚法失误",
     "scene": "立体车库、停车入位",
     "cause": "误踩油门、操作失误",
-    "severity": "一般"
+    "severity": "一般",
+    "deaths": 0,
+    "injuries": 0
   },
   {
     "id": 10,
@@ -413,7 +433,9 @@
     "driver": "曹某，无证驾驶",
     "scene": "加油站加油",
     "cause": "无证驾驶、误把油门当刹车",
-    "severity": "一般"
+    "severity": "一般",
+    "deaths": 0,
+    "injuries": 1
   },
   {
     "id": 11,
@@ -426,7 +448,9 @@
     "driver": "林某，10年驾龄",
     "scene": "4S店试驾",
     "cause": "驾驶不熟练、误踩油门",
-    "severity": "一般"
+    "severity": "一般",
+    "deaths": 0,
+    "injuries": 0
   },
   {
     "id": 12,
@@ -439,7 +463,9 @@
     "driver": "女性，新手/紧张",
     "scene": "地库出口、坡道起步",
     "cause": "紧张慌乱、油门当刹车",
-    "severity": "一般"
+    "severity": "一般",
+    "deaths": 0,
+    "injuries": 0
   },
   {
     "id": 13,
@@ -452,7 +478,9 @@
     "driver": "张某",
     "scene": "国道转弯",
     "cause": "错把油门踩成刹车",
-    "severity": "一般"
+    "severity": "一般",
+    "deaths": 0,
+    "injuries": 0
   },
   {
     "id": 14,
@@ -465,7 +493,9 @@
     "driver": "陈先生",
     "scene": "道路行驶",
     "cause": "油车换电车不熟悉",
-    "severity": "一般"
+    "severity": "一般",
+    "deaths": 0,
+    "injuries": 0
   },
   {
     "id": 15,
@@ -478,7 +508,9 @@
     "driver": "男性，20年驾龄",
     "scene": "城市道路行驶",
     "cause": "单踏板模式误导",
-    "severity": "一般"
+    "severity": "一般",
+    "deaths": 0,
+    "injuries": 0
   },
   {
     "id": 16,
@@ -491,7 +523,9 @@
     "driver": "谢某，48岁，女性，穿高跟鞋",
     "scene": "城市交叉路口",
     "cause": "穿高跟鞋、油门刹车混淆",
-    "severity": "重大"
+    "severity": "重大",
+    "deaths": 1,
+    "injuries": 7
   },
   {
     "id": 17,
@@ -504,7 +538,9 @@
     "driver": "韦某",
     "scene": "城市道路人行道",
     "cause": "疲劳驾驶、不熟悉车辆",
-    "severity": "一般"
+    "severity": "一般",
+    "deaths": 0,
+    "injuries": 4
   },
   {
     "id": 18,
@@ -517,7 +553,9 @@
     "driver": "于某，58岁",
     "scene": "高速公路服务区",
     "cause": "操作不当、油门刹车混淆",
-    "severity": "重大"
+    "severity": "重大",
+    "deaths": 1,
+    "injuries": 0
   },
   {
     "id": 19,
@@ -530,7 +568,9 @@
     "driver": "59岁，女性，老年驾驶员",
     "scene": "小区道路、低速倒车、停车场景",
     "cause": "油门刹车混淆、注意力不集中",
-    "severity": "一般"
+    "severity": "一般",
+    "deaths": 0,
+    "injuries": 1
   },
   {
     "id": 20,
@@ -543,7 +583,9 @@
     "driver": "29岁，女性，新手驾驶员（领证1年）",
     "scene": "超市门前广场、低速停车、人员密集商业区域",
     "cause": "驾驶经验不足、操作失误、油门刹车混淆",
-    "severity": "一般"
+    "severity": "一般",
+    "deaths": 0,
+    "injuries": 2
   },
   {
     "id": 21,
@@ -556,7 +598,9 @@
     "driver": "女性，操作失误",
     "scene": "城市道路、倒车",
     "cause": "油门刹车混淆",
-    "severity": "一般"
+    "severity": "一般",
+    "deaths": 0,
+    "injuries": 0
   },
   {
     "id": 22,
@@ -569,7 +613,9 @@
     "driver": "26岁，女性，新手驾驶员（领证8个月）",
     "scene": "城市十字路口、起步加速、人车混行路段",
     "cause": "驾驶经验不足、紧张慌乱、误操作、油门刹车混淆",
-    "severity": "重大"
+    "severity": "重大",
+    "deaths": 1,
+    "injuries": 2
   },
   {
     "id": 23,
@@ -582,7 +628,9 @@
     "driver": "试驾客户",
     "scene": "试驾倒车",
     "cause": "误将加速踏板当制动踏板",
-    "severity": "一般"
+    "severity": "一般",
+    "deaths": 0,
+    "injuries": 0
   },
   {
     "id": 24,
@@ -595,7 +643,9 @@
     "driver": "客户",
     "scene": "交付中心二楼",
     "cause": "油门刹车踩反",
-    "severity": "一般"
+    "severity": "一般",
+    "deaths": 0,
+    "injuries": 0
   },
   {
     "id": 25,
@@ -608,7 +658,9 @@
     "driver": "成人，分心驾驶",
     "scene": "停车场、车辆起步",
     "cause": "分心操作、油门刹车混淆",
-    "severity": "一般"
+    "severity": "一般",
+    "deaths": 0,
+    "injuries": 1
   },
   {
     "id": 26,
@@ -621,7 +673,9 @@
     "driver": "李某",
     "scene": "启动、倒车操作",
     "cause": "操作不当、油门刹车混淆",
-    "severity": "一般"
+    "severity": "一般",
+    "deaths": 0,
+    "injuries": 1
   },
   {
     "id": 27,
@@ -634,7 +688,9 @@
     "driver": "庄某，成人",
     "scene": "路边车位、倒车入位",
     "cause": "操作失误、油门刹车混淆",
-    "severity": "一般"
+    "severity": "一般",
+    "deaths": 0,
+    "injuries": 0
   },
   {
     "id": 28,
@@ -647,7 +703,9 @@
     "driver": "64岁，男性",
     "scene": "小区内、挪车",
     "cause": "分心+反应下降、误踩",
-    "severity": "一般"
+    "severity": "一般",
+    "deaths": 0,
+    "injuries": 1
   },
   {
     "id": 29,
@@ -660,7 +718,9 @@
     "driver": "58岁，女性，老年驾驶员",
     "scene": "小区内部道路、低速倒车、停车场场景",
     "cause": "油门刹车混淆、操作失误、观察不到位",
-    "severity": "轻微"
+    "severity": "轻微",
+    "deaths": 0,
+    "injuries": 0
   },
   {
     "id": 30,
@@ -673,7 +733,9 @@
     "driver": "62岁，男性，老年驾驶员",
     "scene": "地下车库、车辆起步、低速环境",
     "cause": "单踏板模式习惯、脚法混乱、误踩",
-    "severity": "一般"
+    "severity": "一般",
+    "deaths": 0,
+    "injuries": 0
   },
   {
     "id": 31,
@@ -686,7 +748,9 @@
     "driver": "62岁，男性，老年驾驶员",
     "scene": "小区内部道路、低速倒车场景、人车混行环境",
     "cause": "油门刹车混淆、操作失误、临危处置不当",
-    "severity": "重大"
+    "severity": "重大",
+    "deaths": 1,
+    "injuries": 1
   },
   {
     "id": 32,
@@ -699,7 +763,9 @@
     "driver": "黄某，新手，驾龄短经验少",
     "scene": "道路右拐、减速路段",
     "cause": "经验不足、分心误操作",
-    "severity": "一般"
+    "severity": "一般",
+    "deaths": 0,
+    "injuries": 0
   },
   {
     "id": 33,
@@ -712,7 +778,9 @@
     "driver": "42岁，女性，分心驾驶",
     "scene": "小区道路、倒车",
     "cause": "接听电话分心、误踩",
-    "severity": "一般"
+    "severity": "一般",
+    "deaths": 0,
+    "injuries": 0
   },
   {
     "id": 34,
@@ -725,7 +793,9 @@
     "driver": "32岁，男性，普通驾驶员（驾龄3年）",
     "scene": "山区盘山公路、转弯会车、临崖危险路段",
     "cause": "会车紧张慌乱、油门刹车混淆、误操作",
-    "severity": "一般"
+    "severity": "一般",
+    "deaths": 0,
+    "injuries": 2
   },
   {
     "id": 35,
@@ -738,7 +808,9 @@
     "driver": "65岁，男性",
     "scene": "小区道路、倒车",
     "cause": "反应下降、脚感弱化",
-    "severity": "一般"
+    "severity": "一般",
+    "deaths": 0,
+    "injuries": 1
   },
   {
     "id": 36,
@@ -751,7 +823,9 @@
     "driver": "28岁，女性，新手驾驶员（领证1年）",
     "scene": "地下车库、车辆起步、低速环境",
     "cause": "单踏板模式习惯、脚法混乱、误踩油门、操作不熟练",
-    "severity": "轻微"
+    "severity": "轻微",
+    "deaths": 0,
+    "injuries": 0
   },
   {
     "id": 37,
@@ -764,7 +838,9 @@
     "driver": "33岁，女性，普通驾驶员（驾龄4年）",
     "scene": "滨海环岛路、低速靠边停车、临水临滩危险路段",
     "cause": "操作失误、油门刹车混淆、注意力不集中",
-    "severity": "一般"
+    "severity": "一般",
+    "deaths": 0,
+    "injuries": 2
   },
   {
     "id": 38,
@@ -777,7 +853,9 @@
     "driver": "26岁，男性，新手",
     "scene": "地下车库、停车",
     "cause": "经验不足、慌乱误踩",
-    "severity": "一般"
+    "severity": "一般",
+    "deaths": 0,
+    "injuries": 0
   },
   {
     "id": 39,
@@ -790,7 +868,9 @@
     "driver": "30岁，女性，新手驾驶员（领证6个月）",
     "scene": "加油站内、低速停靠、易燃易爆危险区域",
     "cause": "操作不熟练、紧张慌乱、油门刹车混淆",
-    "severity": "轻微"
+    "severity": "轻微",
+    "deaths": 0,
+    "injuries": 0
   },
   {
     "id": 40,
@@ -803,7 +883,9 @@
     "driver": "57岁，女性，老年驾驶员",
     "scene": "临街停车场、低速倒车、人员密集临街区域",
     "cause": "油门刹车混淆、注意力不集中、操作失误",
-    "severity": "轻微"
+    "severity": "轻微",
+    "deaths": 0,
+    "injuries": 0
   },
   {
     "id": 41,
@@ -816,7 +898,9 @@
     "driver": "58岁，男性",
     "scene": "地下车库、起步驶离",
     "cause": "单踏板习惯、脚法错乱",
-    "severity": "一般"
+    "severity": "一般",
+    "deaths": 0,
+    "injuries": 0
   },
   {
     "id": 42,
@@ -829,7 +913,9 @@
     "driver": "42岁，男性，普通驾驶员（驾龄5年）",
     "scene": "农贸市场门口、人车混行路段、低速通行环境",
     "cause": "遇突发情况紧张慌乱、油门刹车混淆、误操作",
-    "severity": "重大"
+    "severity": "重大",
+    "deaths": 1,
+    "injuries": 4
   },
   {
     "id": 43,
@@ -842,7 +928,9 @@
     "driver": "周某，实习新手",
     "scene": "车库出口、倒车",
     "cause": "新手紧张、误踩油门",
-    "severity": "一般"
+    "severity": "一般",
+    "deaths": 0,
+    "injuries": 1
   },
   {
     "id": 44,
@@ -855,7 +943,9 @@
     "driver": "55岁，男性，普通驾驶员（驾龄10年）",
     "scene": "医院门前路段、低速停靠、人员密集区域",
     "cause": "注意力不集中、油门刹车混淆、操作失误",
-    "severity": "重大"
+    "severity": "重大",
+    "deaths": 1,
+    "injuries": 3
   },
   {
     "id": 45,
@@ -868,7 +958,9 @@
     "driver": "22岁，女性，驾龄8个月",
     "scene": "十字路口、起步",
     "cause": "新手紧张、操作失误",
-    "severity": "重大"
+    "severity": "重大",
+    "deaths": 0,
+    "injuries": 1
   },
   {
     "id": 46,
@@ -881,7 +973,9 @@
     "driver": "38岁，女性，普通驾驶员（驾龄6年）",
     "scene": "小学门口路段、上下学高峰、人员密集区域、低速停靠场景",
     "cause": "注意力不集中、操作失误、油门刹车混淆",
-    "severity": "一般"
+    "severity": "一般",
+    "deaths": 0,
+    "injuries": 2
   },
   {
     "id": 47,
@@ -894,7 +988,9 @@
     "driver": "31岁，女性",
     "scene": "地下车库、起步",
     "cause": "模式不适应、操作错乱",
-    "severity": "一般"
+    "severity": "一般",
+    "deaths": 0,
+    "injuries": 0
   },
   {
     "id": 48,
@@ -907,7 +1003,9 @@
     "driver": "35岁，男性，普通驾驶员（驾龄8年）",
     "scene": "高速收费站车道、低速停靠、封闭收费区域",
     "cause": "操作失误、注意力不集中、油门刹车混淆",
-    "severity": "轻微"
+    "severity": "轻微",
+    "deaths": 0,
+    "injuries": 0
   },
   {
     "id": 49,
@@ -920,7 +1018,9 @@
     "driver": "24岁，女性，新手驾龄10个月",
     "scene": "城市路口、起步加速、人车混行",
     "cause": "驾驶经验不足、紧张慌乱、误操作",
-    "severity": "重大"
+    "severity": "重大",
+    "deaths": 0,
+    "injuries": 1
   },
   {
     "id": 50,
@@ -933,7 +1033,9 @@
     "driver": "刘某，43岁",
     "scene": "城市大桥被追尾",
     "cause": "被追尾后惊慌误踩油门",
-    "severity": "重大"
+    "severity": "重大",
+    "deaths": 6,
+    "injuries": 7
   },
   {
     "id": 51,
@@ -946,7 +1048,9 @@
     "driver": "郭某某",
     "scene": "停车场入口",
     "cause": "分心、误踩油门",
-    "severity": "一般"
+    "severity": "一般",
+    "deaths": 0,
+    "injuries": 4
   },
   {
     "id": 52,
@@ -959,7 +1063,9 @@
     "driver": "成人，车内分心",
     "scene": "停车场入口、等候起步",
     "cause": "分心慌乱、误踩油门",
-    "severity": "重大"
+    "severity": "重大",
+    "deaths": 0,
+    "injuries": 4
   },
   {
     "id": 53,
@@ -972,7 +1078,9 @@
     "driver": "23岁，女性，驾龄6个月",
     "scene": "步行街入口、起步",
     "cause": "新手紧张、误踩",
-    "severity": "一般"
+    "severity": "一般",
+    "deaths": 0,
+    "injuries": 2
   },
   {
     "id": 54,
@@ -985,7 +1093,9 @@
     "driver": "范某，驾龄仅10天",
     "scene": "路边车位、倒车驶离",
     "cause": "新手经验不足、慌乱误踩",
-    "severity": "一般"
+    "severity": "一般",
+    "deaths": 0,
+    "injuries": 0
   },
   {
     "id": 55,
@@ -998,7 +1108,9 @@
     "driver": "36岁，男性，普通驾驶员（驾龄9年）",
     "scene": "冬季冰雪城市道路、跟车减速、低附着力路面",
     "cause": "冰雪路面操作不当、紧张慌乱、油门刹车混淆、误踩油门",
-    "severity": "一般"
+    "severity": "一般",
+    "deaths": 0,
+    "injuries": 4
   },
   {
     "id": 56,
@@ -1011,7 +1123,9 @@
     "driver": "李某",
     "scene": "城市十字路口",
     "cause": "经验不足、油门刹车混淆",
-    "severity": "一般"
+    "severity": "一般",
+    "deaths": 0,
+    "injuries": 0
   },
   {
     "id": 57,
@@ -1024,7 +1138,9 @@
     "driver": "葛女士，女性，普通家用车驾驶员",
     "scene": "黄河岸边道路、低速停车场景、临水危险路段",
     "cause": "停车操作失误、油门刹车混淆、紧张慌乱",
-    "severity": "轻微"
+    "severity": "轻微",
+    "deaths": 0,
+    "injuries": 0
   },
   {
     "id": 58,
@@ -1037,7 +1153,9 @@
     "driver": "35岁，女性",
     "scene": "城市道路、跟车行驶",
     "cause": "应急慌乱、油门刹车混淆",
-    "severity": "一般"
+    "severity": "一般",
+    "deaths": 0,
+    "injuries": 2
   },
   {
     "id": 59,
@@ -1050,7 +1168,9 @@
     "driver": "64岁，男性，老年驾驶员",
     "scene": "小区单元楼门前、低速起步、人车混行环境",
     "cause": "油门刹车混淆、操作失误、观察不到位",
-    "severity": "重大"
+    "severity": "重大",
+    "deaths": 1,
+    "injuries": 0
   },
   {
     "id": 60,
@@ -1063,7 +1183,9 @@
     "driver": "67岁，男性，高龄驾驶员",
     "scene": "小区门口、挪车、人流密集",
     "cause": "反应速度下降、脚感弱化、误踩",
-    "severity": "重大"
+    "severity": "重大",
+    "deaths": 0,
+    "injuries": 3
   },
   {
     "id": 61,
@@ -1076,7 +1198,9 @@
     "driver": "李萌，女性，90后驾驶员",
     "scene": "城市路桥路段、低速掉头场景、临水危险路段",
     "cause": "夜间视线不佳、掉头操作失误、油门刹车混淆",
-    "severity": "一般"
+    "severity": "一般",
+    "deaths": 0,
+    "injuries": 0
   },
   {
     "id": 62,
@@ -1089,7 +1213,9 @@
     "driver": "女性驾驶员（视频未标注年龄，普通家用车驾驶员）",
     "scene": "城市临水道路、低速行驶/停车调整场景、道路边缘危险路段",
     "cause": "临危紧张慌乱、油门与刹车踏板混淆、操作失误",
-    "severity": "重大"
+    "severity": "重大",
+    "deaths": 0,
+    "injuries": 0
   },
   {
     "id": 63,
@@ -1102,7 +1228,9 @@
     "driver": "45岁，男性",
     "scene": "小区道路、倒车",
     "cause": "弯腰分心、误踩油门",
-    "severity": "一般"
+    "severity": "一般",
+    "deaths": 0,
+    "injuries": 0
   },
   {
     "id": 64,
@@ -1115,7 +1243,9 @@
     "driver": "王某，女性，慌乱操作",
     "scene": "医院门口、人流密集",
     "cause": "剐蹭慌乱、油门当刹车",
-    "severity": "重大"
+    "severity": "重大",
+    "deaths": 1,
+    "injuries": 1
   },
   {
     "id": 65,
@@ -1128,7 +1258,9 @@
     "driver": "王某，女性，普通家用车驾驶员",
     "scene": "医院院内道路、低速进院通行场景、人员密集公共区域",
     "cause": "车辆剐蹭后紧张慌乱、油门与刹车踏板混淆、操作失误",
-    "severity": "重大"
+    "severity": "重大",
+    "deaths": 1,
+    "injuries": 1
   },
   {
     "id": 66,
@@ -1141,7 +1273,9 @@
     "driver": "李某，普通家用车驾驶员",
     "scene": "城市滨水道路、车辆起步、临水危险路段",
     "cause": "起步操作失误、油门刹车混淆、临危处置不当",
-    "severity": "一般"
+    "severity": "一般",
+    "deaths": 0,
+    "injuries": 2
   },
   {
     "id": 67,
@@ -1154,7 +1288,9 @@
     "driver": "71岁，男性",
     "scene": "小区门口、挪车",
     "cause": "高龄反应下降、误踩",
-    "severity": "重大"
+    "severity": "重大",
+    "deaths": 0,
+    "injuries": 2
   },
   {
     "id": 68,
@@ -1167,7 +1303,9 @@
     "driver": "成人，操作慌乱",
     "scene": "小区道路、车辆起步",
     "cause": "挂错档+油门刹车混淆",
-    "severity": "一般"
+    "severity": "一般",
+    "deaths": 0,
+    "injuries": 0
   },
   {
     "id": 69,
@@ -1180,7 +1318,9 @@
     "driver": "66岁，男性",
     "scene": "老旧小区、窄路转弯",
     "cause": "观察不足、脚感下降",
-    "severity": "一般"
+    "severity": "一般",
+    "deaths": 0,
+    "injuries": 0
   },
   {
     "id": 70,
@@ -1193,7 +1333,9 @@
     "driver": "55岁，男性",
     "scene": "立体车库、停车取卡",
     "cause": "脚位不当、误触油门",
-    "severity": "一般"
+    "severity": "一般",
+    "deaths": 0,
+    "injuries": 0
   },
   {
     "id": 71,
@@ -1206,7 +1348,9 @@
     "driver": "54岁，女性",
     "scene": "商场停车场、停车入位",
     "cause": "微型车踏板间距小、操作空间局促",
-    "severity": "重大"
+    "severity": "重大",
+    "deaths": 0,
+    "injuries": 0
   },
   {
     "id": 72,
@@ -1219,7 +1363,9 @@
     "driver": "女性驾驶员，普通家用车驾驶员",
     "scene": "社区公共区域、低速行驶场景",
     "cause": "操作失误、油门刹车混淆、注意力不集中",
-    "severity": "一般"
+    "severity": "一般",
+    "deaths": 0,
+    "injuries": 0
   },
   {
     "id": 73,
@@ -1232,7 +1378,9 @@
     "driver": "张某，成人，心急分心",
     "scene": "城市道路、倒车",
     "cause": "心急分心、误踩油门",
-    "severity": "一般"
+    "severity": "一般",
+    "deaths": 0,
+    "injuries": 0
   },
   {
     "id": 74,
@@ -1245,7 +1393,9 @@
     "driver": "52岁，女性",
     "scene": "室外停车场、停车入位",
     "cause": "微型车踏板布局、空间局促",
-    "severity": "一般"
+    "severity": "一般",
+    "deaths": 0,
+    "injuries": 0
   },
   {
     "id": 75,
@@ -1258,7 +1408,9 @@
     "driver": "薛某某",
     "scene": "酒店门口停车",
     "cause": "停车时误将刹车踩成油门",
-    "severity": "一般"
+    "severity": "一般",
+    "deaths": 0,
+    "injuries": 1
   },
   {
     "id": 76,
@@ -1271,7 +1423,9 @@
     "driver": "成人，操作失误",
     "scene": "城市道路、倒车",
     "cause": "误踩油门、观察不周",
-    "severity": "重大"
+    "severity": "重大",
+    "deaths": 1,
+    "injuries": 1
   },
   {
     "id": 77,
@@ -1284,7 +1438,9 @@
     "driver": "食客",
     "scene": "饭店门口",
     "cause": "操作失误、油门刹车混淆",
-    "severity": "一般"
+    "severity": "一般",
+    "deaths": 0,
+    "injuries": 0
   },
   {
     "id": 78,
@@ -1297,7 +1453,9 @@
     "driver": "李某",
     "scene": "国道行驶",
     "cause": "操作失误、油门刹车混淆",
-    "severity": "一般"
+    "severity": "一般",
+    "deaths": 0,
+    "injuries": 0
   },
   {
     "id": 79,
@@ -1310,7 +1468,9 @@
     "driver": "60余岁，男性",
     "scene": "路边泊车、食店内",
     "cause": "泊车时踩错油门",
-    "severity": "一般"
+    "severity": "一般",
+    "deaths": 0,
+    "injuries": 6
   },
   {
     "id": 80,
@@ -1323,7 +1483,9 @@
     "driver": "新手司机（驾龄约一个月）",
     "scene": "公园内部倒车",
     "cause": "新手倒车误踩油门",
-    "severity": "一般"
+    "severity": "一般",
+    "deaths": 0,
+    "injuries": 0
   },
   {
     "id": 81,
@@ -1336,7 +1498,9 @@
     "driver": "阙女士，孕期4个月",
     "scene": "城市路口绕行",
     "cause": "紧张慌乱、油门刹车混淆",
-    "severity": "一般"
+    "severity": "一般",
+    "deaths": 0,
+    "injuries": 2
   },
   {
     "id": 82,
@@ -1349,7 +1513,9 @@
     "driver": "阙女士，女性，普通家用车驾驶员",
     "scene": "城市道路、人车混行路段、低速行驶场景",
     "cause": "突发状况紧张慌乱、油门刹车混淆、操作失误",
-    "severity": "一般"
+    "severity": "一般",
+    "deaths": 0,
+    "injuries": 2
   },
   {
     "id": 83,
@@ -1362,7 +1528,9 @@
     "driver": "未披露",
     "scene": "城市道路、碰撞后失控",
     "cause": "首次碰撞后慌乱、误将油门当刹车",
-    "severity": "一般"
+    "severity": "一般",
+    "deaths": 0,
+    "injuries": 0
   },
   {
     "id": 84,
@@ -1375,7 +1543,9 @@
     "driver": "张某某",
     "scene": "广场内部道路",
     "cause": "操作不当、油门刹车混淆",
-    "severity": "一般"
+    "severity": "一般",
+    "deaths": 0,
+    "injuries": 1
   },
   {
     "id": 85,
@@ -1388,7 +1558,9 @@
     "driver": "未披露",
     "scene": "狭窄停车场倒车",
     "cause": "倒车时油门刹车混淆",
-    "severity": "一般"
+    "severity": "一般",
+    "deaths": 0,
+    "injuries": 0
   },
   {
     "id": 86,
@@ -1401,7 +1573,9 @@
     "driver": "75岁，男性",
     "scene": "停车场外掉头、人行道",
     "cause": "高龄反应下降",
-    "severity": "一般"
+    "severity": "一般",
+    "deaths": 0,
+    "injuries": 9
   },
   {
     "id": 87,
@@ -1414,9 +1588,11 @@
     "driver": "未披露",
     "scene": "面馆门口",
     "cause": "误将油门当刹车",
-    "severity": "一般"
+    "severity": "一般",
+    "deaths": 0,
+    "injuries": 0
   },
-      {
+  {
     "id": 88,
     "title": "案例88：四川南充：女司机误踩油门冲进沿街商铺",
     "time": "2026年3月27日",
@@ -1427,9 +1603,11 @@
     "driver": "女性",
     "scene": "商业街区、车库驶出",
     "cause": "油门刹车混淆",
-    "severity": "一般"
-},
-{
+    "severity": "一般",
+    "deaths": 0,
+    "injuries": 0
+  },
+  {
     "id": 89,
     "title": "案例89：重庆万州：新手路口误踩油门追尾出租车",
     "time": "2026年4月15日11时许",
@@ -1440,9 +1618,11 @@
     "driver": "周某，新手驾驶员",
     "scene": "城市路口等红灯",
     "cause": "经验不足、油门刹车混淆",
-    "severity": "一般"
-} 
-    ];
+    "severity": "一般",
+    "deaths": 0,
+    "injuries": 0
+  }
+];
 
     const state = {
       year: "全部",
@@ -1548,7 +1728,13 @@
       document.getElementById("kpiTotal").textContent = list.length;
       document.getElementById("kpiInjury").textContent = list.filter(x => x.severity.includes("受伤") || x.severity.includes("骨折")).length;
       document.getElementById("kpiSenior").textContent = list.filter(x => x.driver.includes("老年") || x.driver.includes("高龄")).length;
-
+      // 统计死亡事故数（deaths > 0 的事故数量）
+      const deathAccidentCount = list.filter(x => (x.deaths || 0) > 0).length;
+      document.getElementById("kpiDeaths").textContent = deathAccidentCount;
+      
+      // 统计受伤事故数（injuries > 0 的事故数量）
+      const injuryAccidentCount = list.filter(x => (x.injuries || 0) > 0).length;
+      document.getElementById("kpiInjuries").textContent = injuryAccidentCount;
       const freq = {};
       list.forEach(x => {
         const key = x.scene.split("、")[0];
